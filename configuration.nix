@@ -62,7 +62,7 @@
     git
     curl
     stow
-    kitty
+    kitty.shell_integration
     starship 
 	ripgrep
 	fd
