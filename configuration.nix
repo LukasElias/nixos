@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-	  ./services.nix
+      ./services.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -41,6 +41,15 @@
   };
 
   hardware.graphics.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.LukasElias = {
@@ -62,16 +71,17 @@
     git
     curl
     stow
-    kitty.shell_integration
+    kitty
     starship 
-	ripgrep
-	fd
-	tree-sitter
-	python315
-	gcc
-	gnumake
-	clang
-	gh
+    ripgrep
+    fd
+    tree-sitter
+    python315
+    gcc
+    gnumake
+    clang
+    gh
+    fuzzel
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

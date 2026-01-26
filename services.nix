@@ -1,7 +1,16 @@
 { config, lib, pkgs, ... }:
 
 {
-  services.tlp.enable = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNER_ON_AC = "performance";
+      CPU_SCALING_GOVERNER_ON_BAT = "powersave";
+    };
+  };
+  services.upower.enable = true;
+
+  services.blueman.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
