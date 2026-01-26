@@ -11,6 +11,12 @@
       ./services.nix
     ];
 
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      # Add additional package names here
+      "spotify"
+    ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -40,12 +46,16 @@
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     settings = {
       General = {
+        FastConnectable = true;
         Experimental = true;
       };
     };
@@ -60,7 +70,10 @@
     ];
   };
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+	xwayland.enable = true;
+  };
   programs.firefox.enable = true;
   programs.neovim.enable = true;
 
@@ -82,6 +95,8 @@
     clang
     gh
     fuzzel
+    spotify
+    xdg-desktop-portal-hyprland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
