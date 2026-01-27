@@ -30,6 +30,12 @@
   home.file = {
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/peripherals/mouse" = {
+      natural-scroll = true;
+    };
+  };
+
   home.sessionVariables = {
     EDITOR = "nvim";
   };
