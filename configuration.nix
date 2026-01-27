@@ -74,6 +74,7 @@
   programs.hyprland = {
     enable = true;
 	xwayland.enable = true;
+	package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
   programs.firefox.enable = true;
   programs.neovim.enable = true;
@@ -97,7 +98,6 @@
     gh
     fuzzel
     spotify
-    xdg-desktop-portal-hyprland
   ];
 
   home-manager = {
