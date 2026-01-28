@@ -20,9 +20,9 @@
     colorScheme = "dark";
   };
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  fonts.fontconfig.enable = true;
   home.packages = [
+    pkgs.nerd-fonts.agave
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -46,6 +46,11 @@
       user.name = "LukasElias";
       user.email = "lukaslundmajland@gmail.com";
     };
+  };
+
+  programs.waybar = {
+    enable = true;
+	systemd.enable = true;
   };
 
   programs.gh.enable = true;
