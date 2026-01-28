@@ -71,13 +71,13 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.LukasElias = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "seat" ]; # Enable ‘sudo’ for the user.
   };
 
   programs.hyprland = {
     enable = true;
-	xwayland.enable = true;
-	package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    xwayland.enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
   programs.firefox.enable = true;
   programs.neovim.enable = true;
