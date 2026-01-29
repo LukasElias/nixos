@@ -95,13 +95,10 @@
     fd
     tree-sitter
     python315
-    gcc
-    gnumake
-    clang
     gh
     fuzzel
     spotify
-	playerctl
+    playerctl
   ];
 
   home-manager = {
