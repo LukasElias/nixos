@@ -31,7 +31,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "LukasLaptop"; # Define your hostname.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -99,6 +99,7 @@
     fuzzel
     spotify
     playerctl
+	wlogout
   ];
 
   home-manager = {
