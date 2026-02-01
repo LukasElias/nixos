@@ -100,7 +100,8 @@
     fuzzel
     spotify
     playerctl
-	wlogout
+    wlogout
+    fastfetch
   ];
 
   home-manager = {
