@@ -64,6 +64,7 @@
       General = {
         FastConnectable = true;
         Experimental = true;
+        AutoEnable = true;
       };
     };
   };
