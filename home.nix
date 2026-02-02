@@ -208,5 +208,26 @@
     };
   };
 
+  programs.kitty = {
+    enable = true;
+
+    settings = {
+      enable_audio_bell = false;
+      scrollback_lines = 1000;
+      tab_bar_align = "center";
+      background_opacity = 0.95;
+    };
+
+    font = {
+      name = "AgaveNerdFont";
+      package = pkgs.nerd-fonts.agave;
+    };
+
+    shellIntegration = {
+      enableBashIntegration = true;
+      mode = "no-cursor";
+    };
+  };
+
   programs.home-manager.enable = true;
 }
