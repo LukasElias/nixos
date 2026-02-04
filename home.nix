@@ -261,10 +261,9 @@
       package = pkgs.nerd-fonts.agave;
     };
 
-    shellIntegration = {
-      enableBashIntegration = true;
-      mode = "no-cursor";
-    };
+    shellIntegration.mode = null;
+    
+	extraConfig = "shell_integration no-cursor";
   };
 
   programs.home-manager.enable = true;
