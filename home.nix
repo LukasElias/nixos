@@ -75,6 +75,11 @@
         "HDMI-A-1,2560x1440@60,auto-center-up,1"
       ];
 
+      exec-once = [
+        "[workspace 2 silent] $browser"
+        "[workspace 3 silent] spotify"
+      ];
+
       workspace = [
         "1,monitor:eDP-1"
         "2,monitor:eDP-1"
