@@ -93,8 +93,8 @@
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        # "col.active_border" = "rgba($skyAlphaff) rgba($mauveAlphaff) 45deg";
-        # "col.inactive_border" = "rgba($skyAlphaff) rgba($mauveAlphaff) 45deg";
+        "col.active_border" = "rgb(${config.colorScheme.palette.base0B}) rgb(${config.colorScheme.palette.base0E}) 45deg";
+        "col.inactive_border" = "rgb(${config.colorScheme.palette.base0A}) rgb(${config.colorScheme.palette.base0F}) 45deg";
         resize_on_border = true;
         allow_tearing = false;
         layout = "pseudo";
@@ -134,7 +134,6 @@
         disable_hyprland_logo = true;
         vfr = true;
       };
-
 
       input = {
       	kb_layout = "dk";
@@ -210,12 +209,12 @@
       bindm = [
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
-	  ];
+      ];
 
       binde = [
         ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
-	  ];
+      ];
     };
   };
 
@@ -263,7 +262,7 @@
 
     shellIntegration.mode = null;
     
-	extraConfig = "shell_integration no-cursor";
+    extraConfig = "shell_integration no-cursor";
   };
 
   programs.home-manager.enable = true;
