@@ -101,6 +101,7 @@
     playerctl
     wlogout
     fastfetch
+    quickshell
   ];
 
   home-manager = {
