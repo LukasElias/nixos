@@ -18,6 +18,7 @@
     builtins.elem (lib.getName pkg) [
       # Add additional package names here
       "spotify"
+	  "arena"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -34,6 +35,8 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.blacklistedKernelModules = [ "ideapad_laptop" ];
+
   networking.hostName = "LukasLaptop"; # Define your hostname.
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -42,7 +45,7 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/copenhagen";
+  time.timeZone = "Europe/Copenhagen";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "da_DK.UTF-8";
@@ -63,6 +66,8 @@
       General = {
         FastConnectable = true;
         Experimental = true;
+      };
+      Policy = {
         AutoEnable = true;
       };
     };
@@ -71,8 +76,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.LukasElias = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "seat" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "seat" "plugdev" ]; # Enable ‘sudo’ for the user.
   };
+
+  users.groups.plugdev = {};
 
   programs.hyprland = {
     enable = true;
@@ -102,7 +109,20 @@
     wlogout
     fastfetch
     quickshell
+    unzip
+    rustup
+    yazi
+    gcc
+    brightnessctl
+    arena
   ];
+
+  services.udisks2.enable = true;
+
+  services.udev.extraRules = ''
+    # Micro:bit / DAPLink debugger
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0666", GROUP="plugdev"
+  '';
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };

@@ -29,6 +29,7 @@
   fonts.fontconfig.enable = true;
   home.packages = [
     pkgs.nerd-fonts.agave
+    pkgs.rust-analyzer
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -61,6 +62,15 @@
 
   programs.gh.enable = true;
 
+  services.udiskie = {
+    enable = true;
+    settings = {
+      program_options = {
+        file_manager = "${pkgs.yazi}/bin/yazi";
+      };
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -82,8 +92,8 @@
 
       workspace = [
         "1,monitor:eDP-1"
-        "2,monitor:eDP-1"
-        "3,monitor:HDMI-A-1"
+        "3,monitor:eDP-1"
+        "2,monitor:HDMI-A-1"
         "4,monitor:HDMI-A-1"
       ];
 
