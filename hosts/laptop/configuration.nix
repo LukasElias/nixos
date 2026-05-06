@@ -117,6 +117,21 @@
     arena
   ];
 
+  environment.etc."systemd/system-sleep/i8042-fix.sh" = {
+  text = ''
+    #!/bin/sh
+    case $1/$2 in
+      pre/*)
+        rmmod i8042
+        ;;
+      post/*)
+        modprobe i8042 reset=1
+        ;;
+    esac
+  '';
+  mode = "0755";
+};
+
   services.udisks2.enable = true;
 
   services.udev.extraRules = ''
