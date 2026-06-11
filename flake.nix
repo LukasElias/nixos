@@ -23,7 +23,7 @@
     nixosConfigurations.LukasLaptop = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./hosts/laptop/configuration.nix
+        ./hosts/LukasLaptop/configuration.nix
         inputs.home-manager.nixosModules.default
       ];
     };

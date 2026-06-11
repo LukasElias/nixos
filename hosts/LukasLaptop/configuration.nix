@@ -4,21 +4,28 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./../../services.nix
+      ./../../nixosModules/services.nix
       inputs.home-manager.nixosModules.default
     ];
 
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  nix = {
+    settings = {
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 5d";
+    };
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       # Add additional package names here
       "spotify"
-	  "arena"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -26,20 +33,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 5d";
-  };
-
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.blacklistedKernelModules = [ "ideapad_laptop" ];
 
   networking.hostName = "LukasLaptop"; # Define your hostname.
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -55,20 +54,22 @@
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        FastConnectable = true;
-        Experimental = true;
-      };
-      Policy = {
-        AutoEnable = true;
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General = {
+          FastConnectable = true;
+          Experimental = true;
+        };
+        Policy = {
+          AutoEnable = true;
+        };
       };
     };
   };
@@ -114,23 +115,22 @@
     yazi
     gcc
     brightnessctl
-    arena
   ];
 
   environment.etc."systemd/system-sleep/i8042-fix.sh" = {
-  text = ''
-    #!/bin/sh
-    case $1/$2 in
-      pre/*)
-        rmmod i8042
-        ;;
-      post/*)
-        modprobe i8042 reset=1
-        ;;
-    esac
-  '';
-  mode = "0755";
-};
+    text = ''
+      #!/bin/sh
+      case $1/$2 in
+        pre/*)
+          rmmod i8042
+          ;;
+        post/*)
+          modprobe i8042 reset=1
+          ;;
+      esac
+    '';
+    mode = "0755";
+  };
 
   services.udisks2.enable = true;
 
@@ -142,7 +142,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      "LukasElias" = import ./../../home.nix;
+      "LukasElias" = import ./../../homeModules/home.nix;
     };
   };
 
