@@ -62,6 +62,26 @@
 
   programs.gh.enable = true;
 
+  programs.bash = {
+    enable = true;
+    historySize = 1000;
+    historyFileSize = 10000;
+    shellAliases = {
+      ls = "ls --color";
+      grep = "grep --color";
+    };
+  };
+
+  programs.dircolors = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   services.udiskie = {
     enable = true;
     settings = {
