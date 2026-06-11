@@ -4,7 +4,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./../../nixosModules/services.nix
+      ./../../nixosModules
       inputs.home-manager.nixosModules.default
     ];
 
@@ -142,7 +142,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      "LukasElias" = import ./../../homeModules/home.nix;
+      "LukasElias" = import ./../../homeManagerModules;
     };
   };
 
