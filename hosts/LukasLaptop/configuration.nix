@@ -88,7 +88,6 @@
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
   programs.firefox.enable = true;
-  programs.neovim.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -99,8 +98,6 @@
     stow
     kitty
     starship 
-    ripgrep
-    fd
     tree-sitter
     python315
     gh

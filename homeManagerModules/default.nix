@@ -5,5 +5,6 @@
     ./home.nix
     ./hyprland.nix
     ./kitty.nix
+    ./nvim.nix
   ];
 }

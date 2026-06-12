@@ -27,9 +27,12 @@
   };
 
   fonts.fontconfig.enable = true;
-  home.packages = [
-    pkgs.nerd-fonts.agave
-    pkgs.rust-analyzer
+  home.packages = with pkgs; [
+    nerd-fonts.agave
+    rust-analyzer
+    lua-language-server
+    fd
+    ripgrep
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
