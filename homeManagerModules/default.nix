@@ -4,6 +4,6 @@
   imports = [
     ./home.nix
     ./hyprland.nix
-	./kitty.nix
+    ./kitty.nix
   ];
 }
