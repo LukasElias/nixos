@@ -1,22 +1,20 @@
 { config, lib, pkgs, ... }:
 
-let
-  nvimConfig = pkgs.vimUtils.buildVimPlugin {
-    name = "nvimConfig";
-    src = ../config/nvim;
-  };
-in 
 {
+  xdg.configFile."nvim" = {
+    source = ../config/nvim;
+    recursive = true;
+  };
+
   programs.neovim = {
     enable = true;
 
     plugins = with pkgs.vimPlugins; [
-      # theme
       catppuccin-nvim
 
       # languages
       nvim-lspconfig
-      nvim-treesitter.withAllGrammers
+      nvim-treesitter.withAllGrammars
 
       # nvim-cmp
       nvim-cmp
@@ -37,14 +35,18 @@ in
       plenary-nvim
       which-key-nvim
       comment-nvim
+    ];
 
-      # my config
-      nvimConfig
+    extraPackages = with pkgs; [
+      wl-clipboard
+      fd
+      ripgrep
     ];
 
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-  }
+    waylandSupport = true;
+  };
 }
