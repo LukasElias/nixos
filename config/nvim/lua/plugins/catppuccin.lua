@@ -56,12 +56,11 @@ require("catppuccin").setup({
     custom_highlights = {},
     default_integrations = false,
     auto_integrations = false,
-    -- integrations = {
-    --     cmp = true,
-    --     gitsigns = true,
-    --     nvimtree = true,
-        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-    -- },
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+    },
 })
 
 -- setup must be called before loading
