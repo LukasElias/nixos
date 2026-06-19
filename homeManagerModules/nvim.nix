@@ -10,6 +10,7 @@
     enable = true;
 
     plugins = with pkgs.vimPlugins; [
+      # colorscheme
       catppuccin-nvim
 
       # languages
