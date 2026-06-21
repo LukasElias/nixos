@@ -4,6 +4,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
+    configType = "hyprlang";
+    package = null;
+    portalPackage = null;
+
     settings = {
       "$terminal" = "kitty";
       "$menu" = "fuzzel";
@@ -61,30 +65,24 @@
       };
 
       dwindle = {
-      	pseudotile = true;
-      	preserve_split = true;
+        preserve_split = true;
       };
       
       master = {
-      	new_status = "master";
-      	orientation = "left";
+        new_status = "master";
+        orientation = "left";
       };
       
-      misc = {
-        disable_hyprland_logo = true;
-        vfr = true;
-      };
-
       input = {
-      	kb_layout = "dk";
-      	follow_mouse = 1;
-      	sensitivity = 0;
-      	repeat_delay = 300;
-      	repeat_rate = 50;
-      	touchpad = {
+        kb_layout = "dk";
+        follow_mouse = 1;
+        sensitivity = 0;
+        repeat_delay = 300;
+        repeat_rate = 50;
+        touchpad = {
           natural_scroll = true;
           scroll_factor = 0.7;
-      	};
+        };
       };
 
       "$mainMod" = "SUPER";
@@ -95,7 +93,7 @@
         "$mainMod, M, exec, wlogout -s"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, $menu --launch-prefix='$launchPrefix'"
-        "$mainMod, T, togglesplit, # dwindle"
+        "$mainMod, T, layoutmsg, togglesplit, # dwindle"
         # "$mainMod, I, exec, grim -g "$(slurp)" # Take a screenshot"
         "$mainMod, E, exec, bemoji -t"
         "$mainMod, C, killactive"

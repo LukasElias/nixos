@@ -39,6 +39,7 @@
       nvim-web-devicons
       which-key-nvim
       comment-nvim
+	  lazydev-nvim
     ];
 
     extraPackages = with pkgs; [
@@ -47,6 +48,7 @@
       ripgrep
       rust-analyzer
       lua-language-server
+	  nil
     ];
 
     defaultEditor = true;
@@ -54,5 +56,10 @@
     vimAlias = true;
     vimdiffAlias = true;
     waylandSupport = true;
+
+    withPerl = false;
+    withRuby = false;
+    withNodeJs = false;
+    withPython3 = false;
   };
 }
