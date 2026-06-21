@@ -31,10 +31,10 @@ vim.keymap.set("n", "<leader>sl", require("telescope.builtin").live_grep, { desc
 vim.keymap.set("n", "<leader>sg", require("telescope.builtin").git_files, { desc = "[s]earch [g]it files" })
 vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[s]earch [f]iles" })
 
--- vim stuff
+-- vim
 vim.keymap.set("n", "<leader>sb", require("telescope.builtin").buffers, { desc = "[s]earch [b]uffers" })
 vim.keymap.set("n", "<leader>sm", require("telescope.builtin").man_pages, { desc = "[s]earch [m]an pages" })
 vim.keymap.set("n", "<leader>sh", require("telescope.builtin").command_history, { desc = "[s]earch command [h]istory" })
 
-
+-- telescope
 vim.keymap.set("n", "<leader>st", require("telescope.builtin").builtin, { desc = "[s]earch [t]elescope builtin" })

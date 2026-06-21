@@ -10,7 +10,7 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
     },
 	completion = {
-		completeopt = 'menu,menuone,noinsert',
+		completeopt = "menu,menuone,noinsert",
 	},
     sources = cmp.config.sources({
         { name = "nvim_lsp" },

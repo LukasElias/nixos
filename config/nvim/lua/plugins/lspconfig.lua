@@ -17,7 +17,7 @@ local on_attach = function(_, bufnr)
     bufmap("<leader>sd", require("telescope.builtin").diagnostics, "[s]earch [d]iagnostics")
 
     bufmap("K", vim.lsp.buf.hover, "Hover")
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
         vim.lsp.buf.format()
     end, {})
 end
@@ -28,7 +28,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 for _, server in ipairs(servers) do
     vim.lsp.config(server, {
         capabilities = capabilities,
-		on_attach = on_attach,
+        on_attach = on_attach,
     })
     vim.lsp.enable(server)
 end

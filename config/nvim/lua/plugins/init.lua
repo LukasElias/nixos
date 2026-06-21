@@ -1,5 +1,7 @@
 require("plugins.catppuccin")
 require("plugins.cmp")
+require("plugins.comment")
+require("plugins.gitsigns")
 require("plugins.ibl")
 require("plugins.lspconfig")
 require("plugins.lualine")
