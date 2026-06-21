@@ -1,9 +1,9 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -18,7 +18,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 350
 vim.opt.timeoutlen = 300
@@ -26,9 +26,9 @@ vim.opt.timeoutlen = 300
 vim.opt.linebreak = true
 
 vim.opt.completeopt = {
-    'menuone',
-    'noinsert',
-    'noselect'
+    "menuone",
+    "noinsert",
+    "noselect"
 }
 
 vim.opt.list = true
@@ -38,25 +38,33 @@ vim.opt.listchars = {
     trail = "•",
 }
 
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
-        vim.highlight.on_yank()
+        vim.hl.on_yank()
     end,
     group = highlight_group,
-    pattern = '*',
+    pattern = "*",
 })
 
 -- Keybinds
 
-vim.keymap.set('n', 'H', function ()
-	vim.opt.hlsearch = not vim.opt.hlsearch:get()
+vim.keymap.set("n", "H", function()
+    vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end)
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
--- vim.keymap.set('n', '[d', vim.diagnostic., { desc = 'Go to previous diagnostic message' })
--- vim.keymap.set('n', ']d', vim.diagnostic., { desc = 'Go to next diagnostic message' })
+
+local diagnostic_jump = function(count)
+    return function()
+        vim.diagnostic.jump({ count = count })
+        vim.diagnostic.open_float()
+    end
+end
+
+vim.keymap.set("n", "[d", diagnostic_jump(-1), { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", diagnostic_jump(1), { desc = "Go to next diagnostic message" })
