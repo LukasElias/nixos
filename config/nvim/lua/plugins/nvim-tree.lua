@@ -13,3 +13,5 @@ require("nvim-tree").setup({
         dotfiles = true,
     },
 })
+
+vim.keymap.set("n", "<leader>nt", ":NvimTreeToggle<CR>", { desc = "[n]vim-tree [t]oggle" })

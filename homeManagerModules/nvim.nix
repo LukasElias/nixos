@@ -27,13 +27,16 @@
       vim-fugitive
       vim-rhubarb
 
+      # telescope
+      telescope-fzf-native-nvim
+      telescope-nvim
+      plenary-nvim
+
       # other
       indent-blankline-nvim
       lualine-nvim
       nvim-tree-lua
       nvim-web-devicons
-      telescope-nvim
-      plenary-nvim
       which-key-nvim
       comment-nvim
     ];
@@ -42,6 +45,8 @@
       wl-clipboard
       fd
       ripgrep
+      rust-analyzer
+      lua-language-server
     ];
 
     defaultEditor = true;
