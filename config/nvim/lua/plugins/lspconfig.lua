@@ -9,11 +9,10 @@ local on_attach = function(_, bufnr)
     end
 
     bufmap("<leader>r", vim.lsp.buf.rename, "Rename")
-
-    bufmap("gd", vim.lsp.buf.definition, "Go to definition")
-    bufmap("gD", vim.lsp.buf.declaration, "Go to declaration")
-    bufmap("gI", vim.lsp.buf.implementation, "Go to implementation")
-    bufmap("<leader>D", vim.lsp.buf.type_definition, "Go to type_defintion")
+    bufmap("<leader>d", vim.lsp.buf.definition, "Go to definition")
+    bufmap("<leader>D", vim.lsp.buf.declaration, "Go to declaration")
+    bufmap("<leader>I", vim.lsp.buf.implementation, "Go to implementation")
+    bufmap("<leader>T", vim.lsp.buf.type_definition, "Go to type_defintion")
 
     -- bufmap("gr", require("telescope.builtin").lsp_references)
     -- bufmap("<leader>s", require("telescope.builtin").lsp_document_symbols)

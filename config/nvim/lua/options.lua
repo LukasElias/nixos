@@ -18,7 +18,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.wo.signcolumn = 'yes'
+vim.opt.signcolumn = 'yes'
 
 vim.opt.updatetime = 350
 vim.opt.timeoutlen = 300
@@ -29,6 +29,13 @@ vim.opt.completeopt = {
     'menuone',
     'noinsert',
     'noselect'
+}
+
+vim.opt.list = true
+vim.opt.listchars = {
+    space = "⋅",
+    tab = "» ",
+    trail = "•",
 }
 
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

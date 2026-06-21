@@ -1,0 +1,7 @@
+require("plugins.catppuccin")
+require("plugins.cmp")
+require("plugins.ibl")
+require("plugins.lspconfig")
+require("plugins.lualine")
+require("plugins.nvim-tree")
+require("plugins.nvim-treesitter")
