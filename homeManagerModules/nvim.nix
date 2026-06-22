@@ -43,15 +43,13 @@
       which-key-nvim
       comment-nvim
       lazydev-nvim
+      vim-sleuth
     ];
 
     extraPackages = with pkgs; [
       wl-clipboard
       fd
       ripgrep
-      rust-analyzer
-      lua-language-server
-      nil
     ];
 
     defaultEditor = true;

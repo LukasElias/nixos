@@ -34,7 +34,11 @@
     };
     devShells."${system}".default = pkgs.mkShell {
       packages = with pkgs; [
+        # lsp
         nil
+        lua-language-server
+
+        # formatter
         alejandra
         stylua
       ];
