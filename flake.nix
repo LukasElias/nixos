@@ -17,14 +17,26 @@
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    # use "nixos", or your hostname as the name of the configuration
-    # it's a better practice than "default" shown in the video
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages."${system}";
+  in {
     nixosConfigurations.LukasLaptop = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
       modules = [
         ./hosts/LukasLaptop/configuration.nix
         inputs.home-manager.nixosModules.default
+      ];
+    };
+    devShells."${system}".default = pkgs.mkShell {
+      packages = with pkgs; [
+        nil
+        alejandra
+        stylua
       ];
     };
   };

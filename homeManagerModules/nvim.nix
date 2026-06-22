@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   xdg.configFile."nvim" = {
     source = ../config/nvim;
     recursive = true;
@@ -39,7 +42,7 @@
       nvim-web-devicons
       which-key-nvim
       comment-nvim
-	  lazydev-nvim
+      lazydev-nvim
     ];
 
     extraPackages = with pkgs; [
@@ -48,7 +51,7 @@
       ripgrep
       rust-analyzer
       lua-language-server
-	  nil
+      nil
     ];
 
     defaultEditor = true;

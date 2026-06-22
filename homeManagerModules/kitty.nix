@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.kitty = {
     enable = true;
 
@@ -44,7 +47,7 @@
     };
 
     shellIntegration.mode = null;
-    
+
     extraConfig = "shell_integration no-cursor";
   };
 }

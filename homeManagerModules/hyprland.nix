@@ -1,6 +1,9 @@
-{ config, inputs, pkgs, ... }:
-
 {
+  config,
+  inputs,
+  pkgs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -43,14 +46,14 @@
         allow_tearing = false;
         layout = "pseudo";
       };
-      
+
       decoration = {
         rounding = 10;
-        
+
         blur.enabled = false;
         shadow.enabled = false;
       };
-      
+
       animations = {
         enabled = true;
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
@@ -67,12 +70,12 @@
       dwindle = {
         preserve_split = true;
       };
-      
+
       master = {
         new_status = "master";
         orientation = "left";
       };
-      
+
       input = {
         kb_layout = "dk";
         follow_mouse = 1;

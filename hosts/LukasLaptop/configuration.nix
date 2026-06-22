@@ -1,19 +1,26 @@
-{ config, lib, pkgs, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./../../nixosModules
-      inputs.home-manager.nixosModules.default
-    ];
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./../../nixosModules
+    inputs.home-manager.nixosModules.default
+  ];
 
   nix = {
     settings = {
       substituters = ["https://hyprland.cachix.org"];
       trusted-substituters = ["https://hyprland.cachix.org"];
       trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
     gc = {
       automatic = true;
@@ -36,7 +43,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.blacklistedKernelModules = [ "ideapad_laptop" ];
+  boot.blacklistedKernelModules = ["ideapad_laptop"];
 
   networking.hostName = "LukasLaptop"; # Define your hostname.
 
@@ -77,7 +84,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.LukasElias = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "seat" "plugdev" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "seat"
+      "plugdev"
+    ]; # Enable ‘sudo’ for the user.
   };
 
   users.groups.plugdev = {};
@@ -97,7 +108,7 @@
     curl
     stow
     kitty
-    starship 
+    starship
     tree-sitter
     python315
     gh
@@ -137,7 +148,7 @@
   '';
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "LukasElias" = import ./../../homeManagerModules;
     };
@@ -145,6 +156,4 @@
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }
-

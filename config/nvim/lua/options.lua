@@ -59,12 +59,13 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Diagnostic keymaps
 
-local diagnostic_jump = function(count)
-    return function()
-        vim.diagnostic.jump({ count = count })
-        vim.diagnostic.open_float()
-    end
-end
+vim.diagnostic.config({
+    jump = {
+        on_jump = function(_, bufnr)
+            vim.diagnostic.open_float({ bufnr = bufnr })
+        end
+    }
+})
 
-vim.keymap.set("n", "[d", diagnostic_jump(-1), { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", diagnostic_jump(1), { desc = "Go to next diagnostic message" })
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Go to next diagnostic message" })
