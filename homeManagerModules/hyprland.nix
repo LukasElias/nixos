@@ -81,9 +81,18 @@
         direction = "horizontal";
         action = "workspace";
       };
-      # window_rule = {
-      #
-      # };
+      window_rule = [
+        {
+          name = "Browser on workspace 2";
+          match.initial_class = lib.generators.mkLuaInline "\"(?i)\" .. browser";
+          workspace = "2 silent";
+        }
+        {
+          name = "Music Player on workspace 3";
+          match.initial_class = lib.generators.mkLuaInline "\"(?i)\" .. music_player";
+          workspace = "3 silent";
+        }
+      ];
 
       # ----------------binds-----------------
       main_mod._var = "SUPER";

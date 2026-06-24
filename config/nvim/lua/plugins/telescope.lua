@@ -35,6 +35,7 @@ vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { des
 vim.keymap.set("n", "<leader>sb", require("telescope.builtin").buffers, { desc = "[s]earch [b]uffers" })
 vim.keymap.set("n", "<leader>sm", require("telescope.builtin").man_pages, { desc = "[s]earch [m]an pages" })
 vim.keymap.set("n", "<leader>sh", require("telescope.builtin").command_history, { desc = "[s]earch command [h]istory" })
+vim.keymap.set("n", "<leader>sc", require("telescope.builtin").current_buffer_fuzzy_find, { desc = "[s]earch [c]urrent buffer" })
 
 -- telescope
 vim.keymap.set("n", "<leader>st", require("telescope.builtin").builtin, { desc = "[s]earch [t]elescope builtin" })
