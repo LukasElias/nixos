@@ -1,161 +1,179 @@
 {
+  lib,
   config,
-  inputs,
-  pkgs,
   ...
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
 
-    configType = "hyprlang";
+    configType = "lua";
     package = null;
     portalPackage = null;
 
     settings = {
-      "$terminal" = "kitty";
-      "$menu" = "fuzzel";
-      "$browser" = "firefox";
-      "$launchPrefix" = "";
+      terminal._var = "kitty";
+      menu._var = "fuzzel";
+      music_player._var = "spotify";
+      browser._var = "firefox";
 
-      monitor = [
-        "eDP-1,1920x1200@60,auto-center-down,1"
-        "HDMI-A-1,2560x1440@60,auto-center-up,1"
-      ];
-
-      exec-once = [
-        "[workspace 2 silent] $browser"
-        "[workspace 3 silent] spotify"
-      ];
-
-      workspace = [
-        "1,monitor:eDP-1"
-        "3,monitor:eDP-1"
-        "2,monitor:HDMI-A-1"
-        "4,monitor:HDMI-A-1"
-      ];
-
-      windowrule = "match:class Spotify, workspace 3 silent";
-
-      general = {
-        gaps_in = 5;
-        gaps_out = 10;
-        border_size = 2;
-        "col.active_border" = "rgb(${config.colorScheme.palette.base0B}) rgb(${config.colorScheme.palette.base0E}) 45deg";
-        "col.inactive_border" = "rgb(${config.colorScheme.palette.base0A}) rgb(${config.colorScheme.palette.base0F}) 45deg";
-        resize_on_border = true;
-        allow_tearing = false;
-        layout = "pseudo";
+      monitor = {
+        output = "eDP-1";
+        mode = "1920x1200@60";
+        position = "0x0";
+        scale = 1;
       };
 
-      decoration = {
-        rounding = 10;
-
-        blur.enabled = false;
-        shadow.enabled = false;
-      };
-
-      animations = {
-        enabled = true;
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        animation = [
-          "windows, 1, 4, myBezier"
-          "windowsOut, 1, 4, default, popin 80%"
-          "border, 1, 4, default"
-          "borderangle, 1, 4, default"
-          "fade, 1, 4, default"
-          "workspaces, 0"
+      on = {
+        _args = [
+          "hyprland.start"
+          (lib.generators.mkLuaInline ''            function ()
+                        hl.exec_cmd(music_player)
+                        hl.exec_cmd(browser)
+                      end'')
         ];
       };
 
-      dwindle = {
-        preserve_split = true;
-      };
-
-      master = {
-        new_status = "master";
-        orientation = "left";
-      };
-
-      input = {
-        kb_layout = "dk";
-        follow_mouse = 1;
-        sensitivity = 0;
-        repeat_delay = 300;
-        repeat_rate = 50;
-        touchpad = {
-          natural_scroll = true;
-          scroll_factor = 0.7;
+      config = {
+        general = {
+          gaps_in = 5;
+          gaps_out = 10;
+          border_size = 2;
+          col = {
+            active_border = {
+              colors = [
+                "rgb(${config.colorScheme.palette.base0B})"
+                "rgb(${config.colorScheme.palette.base0E})"
+              ];
+              angle = 45;
+            };
+            inactive_border = {
+              colors = [
+                "rgb(${config.colorScheme.palette.base0A})"
+                "rgb(${config.colorScheme.palette.base0F})"
+              ];
+              angle = 45;
+            };
+          };
+          resize_on_border = true;
+          allow_tearing = false;
+          layout = "dwindle";
+        };
+        decoration = {
+          blur.enabled = false;
+          shadow.enabled = false;
+        };
+        animations.enabled = false;
+        dwindle.preserve_split = true;
+        misc.force_default_wallpaper = 0;
+        input = {
+          kb_layout = "dk";
+          follow_mouse = 1;
+          sensitivity = 0;
+          repeat_delay = 300;
+          repeat_rate = 50;
+          touchpad = {
+            natural_scroll = true;
+          };
         };
       };
+      gesture = {
+        fingers = 3;
+        direction = "horizontal";
+        action = "workspace";
+      };
+      # window_rule = {
+      #
+      # };
 
-      "$mainMod" = "SUPER";
-
-      bind = [
-        "$mainMod, Q, exec, $launchPrefix $terminal"
-        "$mainMod, F, exec, $launchPrefix $browser"
-        "$mainMod, M, exec, wlogout -s"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, R, exec, $menu --launch-prefix='$launchPrefix'"
-        "$mainMod, T, layoutmsg, togglesplit, # dwindle"
-        # "$mainMod, I, exec, grim -g "$(slurp)" # Take a screenshot"
-        "$mainMod, E, exec, bemoji -t"
-        "$mainMod, C, killactive"
-        "$mainMod, P, pin"
-        ", F11, fullscreen, 0"
-        "$mainMod, P, layoutmsg, pseudo, # dwindle"
-        "$mainMod, A, layoutmsg, rollnext # master"
-        "$mainMod, D, layoutmsg, rollprev # master"
-
-        "$mainMod, Space, exec, playerctl play-pause"
-        "$mainMod, right, exec, playerctl next"
-        "$mainMod, left, exec, playerctl previous"
-
-        "$mainMod, H, movefocus, l"
-        "$mainMod, L, movefocus, r"
-        "$mainMod, K, movefocus, u"
-        "$mainMod, J, movefocus, d"
-
-        "$mainMod SHIFT, H, swapwindow, l"
-        "$mainMod SHIFT, L, swapwindow, r"
-        "$mainMod SHIFT, K, swapwindow, u"
-        "$mainMod SHIFT, J, swapwindow, d"
-
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
-
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
-
-        "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ];
-
-      bindm = [
-        "$mainMod, mouse:272, movewindow"
-        "$mainMod, mouse:273, resizewindow"
-      ];
-
-      binde = [
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
-      ];
+      # ----------------binds-----------------
+      main_mod._var = "SUPER";
+      bind = let
+        bindMainMod = {
+          key,
+          dispatcher,
+          flags ? {},
+        }: {
+          _args = [
+            (lib.generators.mkLuaInline "main_mod .. \" + ${key}\"")
+            (lib.generators.mkLuaInline "${dispatcher}")
+            flags
+          ];
+        };
+        directionKeys = {
+          H = "left";
+          J = "up";
+          K = "down";
+          L = "right";
+        };
+      in
+        [
+          # My binds for stuff
+          (bindMainMod {
+            key = "Q";
+            dispatcher = "hl.dsp.exec_cmd(terminal)";
+          })
+          (bindMainMod {
+            key = "B";
+            dispatcher = "hl.dsp.exec_cmd(browser)";
+          })
+          (bindMainMod {
+            key = "M";
+            dispatcher = "hl.dsp.exec_cmd(\"wlogout -s\")";
+          })
+          (bindMainMod {
+            key = "V";
+            dispatcher = "hl.dsp.window.float({ action = \"toggle\" })";
+          })
+          (bindMainMod {
+            key = "R";
+            dispatcher = "hl.dsp.exec_cmd(menu)";
+          })
+          (bindMainMod {
+            key = "T";
+            dispatcher = "hl.dsp.layout(\"togglesplit\")";
+          })
+          # bindMainMod { key = "E"; dispatcher = "hl.dsp.exec_cmd(bemoji -t)"; }
+          (bindMainMod {
+            key = "C";
+            dispatcher = "hl.dsp.window.kill()";
+          })
+          (bindMainMod {
+            key = "P";
+            dispatcher = "hl.dsp.window.pin({ action = \"toggle\" })";
+          })
+          (bindMainMod {
+            key = "F11";
+            dispatcher = "hl.dsp.window.fullscreen({ action = \"toggle\" })";
+          })
+        ]
+        # Binds for windows
+        ++ (lib.mapAttrsToList (key: direction:
+          bindMainMod {
+            inherit key;
+            dispatcher = "hl.dsp.focus({ direction = \"${direction}\" })";
+          })
+        directionKeys)
+        ++ (lib.mapAttrsToList (key: direction:
+          bindMainMod {
+            key = "SHIFT + ${key}";
+            dispatcher = "hl.dsp.window.move({ direction = \"${direction}\" })";
+          })
+        directionKeys)
+        # Binds for workspaces
+        ++ (lib.genList
+          (i:
+            bindMainMod {
+              key = toString (lib.mod (i + 1) 10);
+              dispatcher = "hl.dsp.focus({ workspace = \"${toString (i + 1)}\" })";
+            })
+          10)
+        ++ (lib.genList
+          (i:
+            bindMainMod {
+              key = "SHIFT + ${toString (lib.mod (i + 1) 10)}";
+              dispatcher = "hl.dsp.window.move({ workspace = \"${toString (i + 1)}\" })";
+            })
+          10);
     };
   };
 }
