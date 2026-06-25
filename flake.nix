@@ -41,6 +41,9 @@
         # formatter
         alejandra
         stylua
+
+        # quickshell
+        kdePackages.qtdeclarative
       ];
     };
   };

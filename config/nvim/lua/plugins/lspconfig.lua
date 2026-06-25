@@ -2,6 +2,7 @@ local servers = {
 	"rust_analyzer",
 	"lua_ls",
 	"nil_ls",
+	"qmlls",
 }
 
 local on_attach = function(_, bufnr)
