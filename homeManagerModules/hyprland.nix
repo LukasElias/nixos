@@ -116,7 +116,7 @@
         };
       in
         [
-          # My binds for stuff
+          # Binds for stuff
           (bindMainMod {
             key = "Q";
             dispatcher = "hl.dsp.exec_cmd(terminal)";
@@ -153,6 +153,106 @@
           (bindMainMod {
             key = "F11";
             dispatcher = "hl.dsp.window.fullscreen({ action = \"toggle\" })";
+          })
+
+          # Binds for audio / media
+          (bindMainMod {
+            key = "XF86AudioRaiseVolume";
+            dispatcher = "hl.dsp.exec_cmd(\"wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+\")";
+            flags = {
+              locked = true;
+              repeating = true;
+            };
+          })
+          (bindMainMod {
+            key = "XF86AudioLowerVolume";
+            dispatcher = "hl.dsp.exec_cmd(\"wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-\")";
+            flags = {
+              locked = true;
+              repeating = true;
+            };
+          })
+          (bindMainMod {
+            key = "XF86AudioMute";
+            dispatcher = "hl.dsp.exec_cmd(\"wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle\")";
+            flags = {
+              locked = true;
+              repeating = true;
+            };
+          })
+          (bindMainMod {
+            key = "XF86AudioMicMute";
+            dispatcher = "hl.dsp.exec_cmd(\"wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle\")";
+            flags = {
+              locked = true;
+              repeating = true;
+            };
+          })
+          (bindMainMod {
+            key = "XF86MonBrightnessUp";
+            dispatcher = "hl.dsp.exec_cmd(\"brightnessctl -e4 -n2 set 5%+\")";
+            flags = {
+              locked = true;
+              repeating = true;
+            };
+          })
+          (bindMainMod {
+            key = "XF86MonBrightnessDown";
+            dispatcher = "hl.dsp.exec_cmd(\"brightnessctl -e4 -n2 set 5%-\")";
+            flags = {
+              locked = true;
+              repeating = true;
+            };
+          })
+
+          # requires playerctl
+          (bindMainMod {
+            key = "XF86AudioNext";
+            dispatcher = " hl.dsp.exec_cmd(\"playerctl next\")";
+            flags.locked = true;
+          })
+          (bindMainMod {
+            key = "XF86AudioPause";
+            dispatcher = "hl.dsp.exec_cmd(\"playerctl play-pause\")";
+            flags.locked = true;
+          })
+          (bindMainMod {
+            key = "XF86AudioPlay";
+            dispatcher = " hl.dsp.exec_cmd(\"playerctl play-pause\")";
+            flags.locked = true;
+          })
+          (bindMainMod {
+            key = "XF86AudioPrev";
+            dispatcher = " hl.dsp.exec_cmd(\"playerctl previous\")";
+            flags.locked = true;
+          })
+
+          (bindMainMod {
+            key = "right";
+            dispatcher = " hl.dsp.exec_cmd(\"playerctl next\")";
+            flags.locked = true;
+          })
+          (bindMainMod {
+            key = "Space";
+            dispatcher = "hl.dsp.exec_cmd(\"playerctl play-pause\")";
+            flags.locked = true;
+          })
+          (bindMainMod {
+            key = "left";
+            dispatcher = " hl.dsp.exec_cmd(\"playerctl previous\")";
+            flags.locked = true;
+          })
+
+          # Binds for moving/resizing windows with mouse
+          (bindMainMod {
+            key = "mouse:272";
+            dispatcher = "hl.dsp.window.drag()";
+            flags.mouse = true;
+          })
+          (bindMainMod {
+            key = "mouse:273";
+            dispatcher = "hl.dsp.window.resize()";
+            flags.mouse = true;
           })
         ]
         # Binds for windows
