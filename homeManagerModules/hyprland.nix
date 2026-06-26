@@ -97,13 +97,18 @@
       # ----------------binds-----------------
       main_mod._var = "SUPER";
       bind = let
-        bindMainMod = {
+        bindKey = {
           key,
           dispatcher,
-          flags ? {},
+          flags ? null,
+          mainMod ? true,
         }: {
           _args = [
-            (lib.generators.mkLuaInline "main_mod .. \" + ${key}\"")
+            (
+              if mainMod
+              then (lib.generators.mkLuaInline "main_mod .. \" + ${key}\"")
+              else " + ${key}"
+            )
             (lib.generators.mkLuaInline "${dispatcher}")
             flags
           ];
@@ -117,139 +122,150 @@
       in
         [
           # Binds for stuff
-          (bindMainMod {
+          (bindKey {
             key = "Q";
             dispatcher = "hl.dsp.exec_cmd(terminal)";
           })
-          (bindMainMod {
+          (bindKey {
             key = "B";
             dispatcher = "hl.dsp.exec_cmd(browser)";
           })
-          (bindMainMod {
+          (bindKey {
             key = "M";
             dispatcher = "hl.dsp.exec_cmd(\"wlogout -s\")";
           })
-          (bindMainMod {
+          (bindKey {
             key = "V";
             dispatcher = "hl.dsp.window.float({ action = \"toggle\" })";
           })
-          (bindMainMod {
+          (bindKey {
             key = "R";
             dispatcher = "hl.dsp.exec_cmd(menu)";
           })
-          (bindMainMod {
+          (bindKey {
             key = "T";
             dispatcher = "hl.dsp.layout(\"togglesplit\")";
           })
           # bindMainMod { key = "E"; dispatcher = "hl.dsp.exec_cmd(bemoji -t)"; }
-          (bindMainMod {
+          (bindKey {
             key = "C";
             dispatcher = "hl.dsp.window.kill()";
           })
-          (bindMainMod {
+          (bindKey {
             key = "P";
             dispatcher = "hl.dsp.window.pin({ action = \"toggle\" })";
           })
-          (bindMainMod {
+          (bindKey {
             key = "F11";
             dispatcher = "hl.dsp.window.fullscreen({ action = \"toggle\" })";
+            mainMod = false;
           })
 
           # Binds for audio / media
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioRaiseVolume";
             dispatcher = "hl.dsp.exec_cmd(\"wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+\")";
             flags = {
               locked = true;
               repeating = true;
             };
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioLowerVolume";
             dispatcher = "hl.dsp.exec_cmd(\"wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-\")";
             flags = {
               locked = true;
               repeating = true;
             };
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioMute";
             dispatcher = "hl.dsp.exec_cmd(\"wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle\")";
             flags = {
               locked = true;
               repeating = true;
             };
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioMicMute";
             dispatcher = "hl.dsp.exec_cmd(\"wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle\")";
             flags = {
               locked = true;
               repeating = true;
             };
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86MonBrightnessUp";
             dispatcher = "hl.dsp.exec_cmd(\"brightnessctl -e4 -n2 set 5%+\")";
             flags = {
               locked = true;
               repeating = true;
             };
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86MonBrightnessDown";
             dispatcher = "hl.dsp.exec_cmd(\"brightnessctl -e4 -n2 set 5%-\")";
             flags = {
               locked = true;
               repeating = true;
             };
+            mainMod = false;
           })
 
           # requires playerctl
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioNext";
             dispatcher = " hl.dsp.exec_cmd(\"playerctl next\")";
             flags.locked = true;
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioPause";
             dispatcher = "hl.dsp.exec_cmd(\"playerctl play-pause\")";
             flags.locked = true;
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioPlay";
             dispatcher = " hl.dsp.exec_cmd(\"playerctl play-pause\")";
             flags.locked = true;
+            mainMod = false;
           })
-          (bindMainMod {
+          (bindKey {
             key = "XF86AudioPrev";
             dispatcher = " hl.dsp.exec_cmd(\"playerctl previous\")";
             flags.locked = true;
+            mainMod = false;
           })
 
-          (bindMainMod {
+          (bindKey {
             key = "right";
             dispatcher = " hl.dsp.exec_cmd(\"playerctl next\")";
             flags.locked = true;
           })
-          (bindMainMod {
+          (bindKey {
             key = "Space";
             dispatcher = "hl.dsp.exec_cmd(\"playerctl play-pause\")";
             flags.locked = true;
           })
-          (bindMainMod {
+          (bindKey {
             key = "left";
             dispatcher = " hl.dsp.exec_cmd(\"playerctl previous\")";
             flags.locked = true;
           })
 
           # Binds for moving/resizing windows with mouse
-          (bindMainMod {
+          (bindKey {
             key = "mouse:272";
             dispatcher = "hl.dsp.window.drag()";
             flags.mouse = true;
           })
-          (bindMainMod {
+          (bindKey {
             key = "mouse:273";
             dispatcher = "hl.dsp.window.resize()";
             flags.mouse = true;
@@ -257,13 +273,13 @@
         ]
         # Binds for windows
         ++ (lib.mapAttrsToList (key: direction:
-          bindMainMod {
+          bindKey {
             inherit key;
             dispatcher = "hl.dsp.focus({ direction = \"${direction}\" })";
           })
         directionKeys)
         ++ (lib.mapAttrsToList (key: direction:
-          bindMainMod {
+          bindKey {
             key = "SHIFT + ${key}";
             dispatcher = "hl.dsp.window.move({ direction = \"${direction}\" })";
           })
@@ -271,14 +287,14 @@
         # Binds for workspaces
         ++ (lib.genList
           (i:
-            bindMainMod {
+            bindKey {
               key = toString (lib.mod (i + 1) 10);
               dispatcher = "hl.dsp.focus({ workspace = \"${toString (i + 1)}\" })";
             })
           10)
         ++ (lib.genList
           (i:
-            bindMainMod {
+            bindKey {
               key = "SHIFT + ${toString (lib.mod (i + 1) 10)}";
               dispatcher = "hl.dsp.window.move({ workspace = \"${toString (i + 1)}\" })";
             })
