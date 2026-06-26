@@ -9,5 +9,6 @@
     ./hyprland.nix
     ./kitty.nix
     ./nvim.nix
+    ./quickshell.nix
   ];
 }
