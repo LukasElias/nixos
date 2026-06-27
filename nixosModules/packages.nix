@@ -25,6 +25,7 @@
     yazi
     gcc
     brightnessctl
+    hyprshutdown
   ];
 
   programs = {
