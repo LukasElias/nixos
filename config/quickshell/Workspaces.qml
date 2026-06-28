@@ -3,29 +3,33 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 
-Repeater {
-	model: Hyprland.workspaces
+RowLayout {
+	spacing: 0
 
-	Rectangle {
-		id: workspace
-		required property HyprlandWorkspace modelData
+	Repeater {
+		model: Hyprland.workspaces
 
-		Layout.preferredWidth: 30
-		Layout.fillHeight: true
+		Rectangle {
+			id: workspace
+			required property HyprlandWorkspace modelData
 
-		color: modelData.id == Hyprland.focusedWorkspace.id ? "#070" : "#700"
+			Layout.preferredWidth: 30
+			Layout.fillHeight: true
 
-		Text {
-			text: workspace.modelData.id
-			color: "#fff"
-			font.pixelSize: 14
+			color: modelData.id == Hyprland.focusedWorkspace.id ? "#070" : "#700"
 
-			anchors.centerIn: parent
-		}
+			Text {
+				text: workspace.modelData.id
+				color: "#fff"
+				font.pixelSize: 14
 
-		MouseArea {
-			anchors.fill: parent
-			onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${workspace.modelData.id} })`)
+				anchors.centerIn: parent
+			}
+
+			MouseArea {
+				anchors.fill: parent
+				onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${workspace.modelData.id} })`)
+			}
 		}
 	}
 }

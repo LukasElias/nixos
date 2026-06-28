@@ -29,11 +29,11 @@ ShellRoot {
 					anchors.fill: parent
 					spacing: 0
 
-					// Workspaces
 					Workspaces {}
 
-					// Time
 					Clock {}
+
+					Audio {}
 
 					// Spacer
 					Item {
