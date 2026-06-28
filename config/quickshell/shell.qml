@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Hyprland
 
 import QtQuick
 import QtQuick.Layouts
@@ -31,32 +30,10 @@ ShellRoot {
 					spacing: 0
 
 					// Workspaces
-					Repeater {
-						model: Hyprland.workspaces
+					Workspaces {}
 
-						Rectangle {
-							id: workspace
-							required property HyprlandWorkspace modelData
-
-							Layout.preferredWidth: 30
-							Layout.fillHeight: true
-
-							color: Hyprland.focusedWorkspace.id == workspace.modelData.id ? "#070" : "#700"
-
-							Text {
-								text: workspace.modelData.id
-								color: "#fff"
-								font.pixelSize: 14
-
-								anchors.centerIn: parent
-							}
-
-							MouseArea {
-								anchors.fill: parent
-								onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${workspace.modelData.id} })`)
-							}
-						}
-					}
+					// Time
+					Clock {}
 
 					// Spacer
 					Item {
