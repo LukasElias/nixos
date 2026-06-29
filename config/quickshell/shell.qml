@@ -39,6 +39,8 @@ ShellRoot {
 
 					Bluetooth {}
 
+					Network {}
+
 					// Spacer
 					Item {
 						Layout.fillWidth: true
