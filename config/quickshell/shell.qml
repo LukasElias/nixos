@@ -35,6 +35,10 @@ ShellRoot {
 
 					Audio {}
 
+					Battery {}
+
+					Bluetooth {}
+
 					// Spacer
 					Item {
 						Layout.fillWidth: true

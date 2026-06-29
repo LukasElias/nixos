@@ -1,0 +1,22 @@
+import Quickshell.Services.UPower
+
+import QtQuick
+import QtQuick.Layouts
+
+RowLayout {
+	id: root
+
+	property UPowerDevice displayDevice: UPower.displayDevice
+	
+	property bool ready: displayDevice && displayDevice.ready
+	property int percentage: ready ? Math.round(displayDevice.percentage * 100) : 0
+
+	Text {
+		text: {
+			if (root.percentage == 0) return "-"
+
+			return root.percentage + "%"
+		}
+		color: "cyan"
+	}
+}
