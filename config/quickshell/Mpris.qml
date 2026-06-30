@@ -7,6 +7,10 @@ RowLayout {
 	id: root
 
 	function pickPlayer(players) {
+		for (let i = 0; i < players.length; i++) {
+			if (players[i].dbusName == "org.mpris.MediaPlayer2.playerctld") return players [i]
+		}
+
 		return players[0]
 	}
 

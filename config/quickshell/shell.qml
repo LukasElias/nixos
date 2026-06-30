@@ -45,6 +45,8 @@ ShellRoot {
 
 					Mpris {}
 
+					Hardware {}
+
 					// Spacer
 					Item {
 						Layout.fillWidth: true
