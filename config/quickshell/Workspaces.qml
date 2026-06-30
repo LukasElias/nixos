@@ -16,7 +16,7 @@ RowLayout {
 			Layout.preferredWidth: 30
 			Layout.fillHeight: true
 
-			color: modelData.id == Hyprland.focusedWorkspace.id ? "#070" : "#700"
+			color: modelData.focused ? "#070" : "#700"
 
 			Text {
 				text: workspace.modelData.id

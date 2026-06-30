@@ -43,6 +43,8 @@ ShellRoot {
 
 					Tray {}
 
+					Mpris {}
+
 					// Spacer
 					Item {
 						Layout.fillWidth: true
