@@ -41,6 +41,8 @@ ShellRoot {
 
 					Network {}
 
+					Tray {}
+
 					// Spacer
 					Item {
 						Layout.fillWidth: true
