@@ -3,6 +3,8 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 RowLayout {
 	id: root
 
@@ -63,14 +65,14 @@ RowLayout {
 	Text {
 		id: cpuUsageText
 
-		text: root.cpuUsage + "%"
-		color: "blue"
+		text: "CPU: " + root.cpuUsage + "%"
+		color: `#${Config.palette.base05}`
 	}
 
 	Text {
 		id: memUsageText
 
-		text: root.memUsage + "%"
-		color: "blue"
+		text: "MEM: " + root.memUsage + "%"
+		color: `#${Config.palette.base05}`
 	}
 }

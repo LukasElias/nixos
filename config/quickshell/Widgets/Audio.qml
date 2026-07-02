@@ -3,6 +3,8 @@ import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 RowLayout {
 	id: root
 
@@ -19,7 +21,7 @@ RowLayout {
 			
 			return root.volume + "%"
 		}
-		color: "red"
+		color: `#${Config.palette.base05}`
 	}
 
 	PwObjectTracker {

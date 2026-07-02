@@ -3,6 +3,8 @@ import Quickshell.Bluetooth
 import QtQuick
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 RowLayout {
 	spacing: 10
 
@@ -14,10 +16,10 @@ RowLayout {
 			required property BluetoothAdapter modelData
 
 			// Adapter info
-			Text {
-				text: adapter.modelData.enabled
-				color: "blue"
-			}
+			// Text {
+			// 	text: adapter.modelData.enabled
+			// 	color: "blue"
+			// }
 
 			// Devices
 			Repeater {
@@ -30,7 +32,7 @@ RowLayout {
 					visible: modelData.connected
 
 					text: modelData.name
-					color: "red"
+					color: `#${Config.palette.base05}`
 				}
 			}
 		}

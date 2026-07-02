@@ -3,6 +3,8 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 RowLayout {
 	spacing: 0
 
@@ -16,11 +18,11 @@ RowLayout {
 			Layout.preferredWidth: 30
 			Layout.fillHeight: true
 
-			color: modelData.focused ? "#070" : "#700"
+			color: modelData.focused ? `#${Config.palette.base0B}` : `#${Config.palette.base08}`
 
 			Text {
 				text: workspace.modelData.id
-				color: "#fff"
+				color: `#${Config.palette.base05}`
 				font.pixelSize: 14
 
 				anchors.centerIn: parent

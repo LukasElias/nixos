@@ -3,6 +3,8 @@ import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 RowLayout {
 	id: root
 
@@ -17,6 +19,6 @@ RowLayout {
 
 			return root.percentage + "%"
 		}
-		color: "cyan"
+		color: `#${Config.palette.base0C}`
 	}
 }

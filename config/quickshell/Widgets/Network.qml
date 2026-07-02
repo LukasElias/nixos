@@ -3,6 +3,8 @@ import Quickshell.Networking
 import QtQuick
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 RowLayout {
 	id: root
 
@@ -18,7 +20,7 @@ RowLayout {
 
 			Text {
 				text: DeviceType.toString(device.modelData.type)
-				color: "green"
+				color: `#${Config.palette.base05}`
 			}
 
 			Repeater {
@@ -30,7 +32,7 @@ RowLayout {
 					text: modelData.name
 					visible: modelData.connected
 
-					color: "red"
+					color: `#${Config.palette.base05}`
 				}
 			}
 		}

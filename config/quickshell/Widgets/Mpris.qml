@@ -3,9 +3,12 @@ import Quickshell.Services.Mpris
 import QtQuick
 import QtQuick.Layouts
 
+import "../config.js" as Config
+
 RowLayout {
 	id: root
 
+	// Fix this function sometime later
 	function pickPlayer(players) {
 		for (let i = 0; i < players.length; i++) {
 			if (players[i].dbusName == "org.mpris.MediaPlayer2.playerctld") return players [i]
@@ -25,7 +28,7 @@ RowLayout {
 
 	Text {
 		text: root.trackTitle + " - " + root.trackArtist
-		color: "red"
+		color: `#${Config.palette.base05}`
 	}
 
 	// An image looks way too small on a bar, I'm gonna add this back when I do a popup

@@ -1,4 +1,3 @@
-import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 
@@ -12,7 +11,7 @@ RowLayout {
 		IconImage {
 			required property SystemTrayItem modelData
 
-			source: { console.log(modelData.icon); return modelData.icon }
+			source: modelData.icon
 			implicitSize: 20
 		}
 	}
