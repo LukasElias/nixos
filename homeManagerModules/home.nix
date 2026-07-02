@@ -59,11 +59,6 @@
     };
   };
 
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
-  };
-
   programs.gh.enable = true;
 
   programs.bash = {
@@ -96,4 +91,6 @@
   };
 
   programs.home-manager.enable = true;
+
+  quickshell.enable = true;
 }

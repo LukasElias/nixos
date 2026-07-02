@@ -3,7 +3,9 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 
-import "Widgets"
+import qs.Widgets
+
+import "config.js" as Config
 
 Scope {
 	id: root
@@ -24,11 +26,7 @@ Scope {
 
 		Rectangle {
 			anchors.fill: parent
-			gradient: Gradient {
-				GradientStop { position: 0.0; color: "#ff000000" }
-				GradientStop { position: 0.8; color: "#66000000" }
-				GradientStop { position: 1.0; color: "#00000000" }
-			}
+			color: `#aa${Config.palette.base00}`
 
 			RowLayout {
 				anchors {
