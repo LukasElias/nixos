@@ -12,6 +12,7 @@ Scope {
 	property var modelData
 
 	PanelWindow {
+		id: window
 		screen: root.modelData
 
 		anchors {
@@ -39,7 +40,9 @@ Scope {
 
 				Splitter {}
 
-				Tray {}
+				Tray {
+					window: window
+				}
 
 				Splitter {}
 
