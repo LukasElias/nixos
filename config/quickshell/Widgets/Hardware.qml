@@ -67,6 +67,7 @@ RowLayout {
 
 		text: "CPU: " + root.cpuUsage + "%"
 		color: `#${Config.palette.base05}`
+		font: Config.font
 	}
 
 	Text {
@@ -74,5 +75,6 @@ RowLayout {
 
 		text: "MEM: " + root.memUsage + "%"
 		color: `#${Config.palette.base05}`
+		font: Config.font
 	}
 }

@@ -10,6 +10,19 @@
       type = lib.types.str;
       default = "default";
     };
+    font = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+          };
+          size = lib.mkOption {
+            type = lib.types.int;
+            default = 16;
+          };
+        };
+      };
+    };
   };
 
   config = lib.mkIf config.quickshell.enable (let
@@ -31,6 +44,11 @@
         base0D: "${config.colorScheme.palette.base0D}",
         base0E: "${config.colorScheme.palette.base0E}",
         base0F: "${config.colorScheme.palette.base0F}"
+      }
+
+      const font = {
+        family: "${config.quickshell.font.name}",
+        pixelSize: ${lib.toString config.quickshell.font.size}
       }
     '';
     quickshellConfigDrv = pkgs.symlinkJoin {

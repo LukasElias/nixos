@@ -19,6 +19,7 @@ RowLayout {
 			// Text {
 			// 	text: adapter.modelData.enabled
 			// 	color: "blue"
+			// 	font: Config.font
 			// }
 
 			// Devices
@@ -33,6 +34,7 @@ RowLayout {
 
 					text: modelData.name
 					color: `#${Config.palette.base05}`
+					font: Config.font
 				}
 			}
 		}

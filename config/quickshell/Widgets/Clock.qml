@@ -7,7 +7,7 @@ import "../config.js" as Config
 Text {
 	text: Qt.formatDateTime(clock.date, "hh:mm")
 	color: `#${Config.palette.base05}`
-	font.pixelSize: 14
+	font: Config.font
 
 	SystemClock {
 		id: clock

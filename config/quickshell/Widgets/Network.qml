@@ -21,6 +21,7 @@ RowLayout {
 			Text {
 				text: DeviceType.toString(device.modelData.type)
 				color: `#${Config.palette.base05}`
+				font: Config.font
 			}
 
 			Repeater {
@@ -33,6 +34,7 @@ RowLayout {
 					visible: modelData.connected
 
 					color: `#${Config.palette.base05}`
+					font: Config.font
 				}
 			}
 		}

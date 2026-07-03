@@ -29,6 +29,7 @@ RowLayout {
 	Text {
 		text: root.trackTitle + " - " + root.trackArtist
 		color: `#${Config.palette.base05}`
+		font: Config.font
 	}
 
 	// An image looks way too small on a bar, I'm gonna add this back when I do a popup

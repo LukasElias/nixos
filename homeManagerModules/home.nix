@@ -92,5 +92,8 @@
 
   programs.home-manager.enable = true;
 
-  quickshell.enable = true;
+  quickshell = {
+    enable = true;
+    font.name = "AgaveNerdFont";
+  };
 }

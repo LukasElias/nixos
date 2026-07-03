@@ -40,9 +40,7 @@ Scope {
 
 				Splitter {}
 
-				Tray {
-					window: window
-				}
+				Tray { window: window }
 
 				Splitter {}
 

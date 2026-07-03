@@ -10,15 +10,24 @@ RowLayout {
 
 	property UPowerDevice displayDevice: UPower.displayDevice
 	
-	property bool ready: displayDevice && displayDevice.ready
-	property int percentage: ready ? Math.round(displayDevice.percentage * 100) : 0
+	readonly property bool ready: displayDevice && displayDevice.ready
+	readonly property int percentage: ready ? Math.round(displayDevice.percentage * 100) : 0
+	readonly property string icon: {
+		if (!ready) return
+		if (percentage > 90) return String.fromCodePoint(0xf0079)
+
+		return String.fromCodePoint(0xf007a + Math.max(0, Math.ceil(percentage / 10) - 1))
+
+	}
+	readonly property string text: {
+		if (!ready) return "-"
+
+		return `${icon} ${percentage}%`
+	}
 
 	Text {
-		text: {
-			if (root.percentage == 0) return "-"
-
-			return root.percentage + "%"
-		}
+		text: root.text
 		color: `#${Config.palette.base0C}`
+		font: Config.font
 	}
 }

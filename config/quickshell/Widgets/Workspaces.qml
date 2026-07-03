@@ -23,7 +23,7 @@ RowLayout {
 			Text {
 				text: workspace.modelData.id
 				color: `#${Config.palette.base05}`
-				font.pixelSize: 14
+				font: Config.font
 
 				anchors.centerIn: parent
 			}

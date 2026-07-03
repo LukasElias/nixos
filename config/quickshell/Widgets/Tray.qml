@@ -17,12 +17,17 @@ RowLayout {
 			required property SystemTrayItem modelData
 
 			color: "transparent"
-			Layout.preferredWidth: 30
+			Layout.preferredWidth: 20
 			Layout.fillHeight: true
 
 			IconImage {
-				anchors.fill: parent
+				anchors {
+					left: parent.left
+					right: parent.right
+					verticalCenter: parent.verticalCenter
+				}
 				source: trayItem.modelData.icon
+				implicitSize: parent.width
 			}
 
 			MouseArea {
