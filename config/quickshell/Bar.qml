@@ -37,7 +37,17 @@ Scope {
 
 				Workspaces {}
 
+				Splitter {}
+
 				Tray {}
+
+				Splitter {}
+
+				Audio {}
+
+				Splitter {}
+
+				Mpris {}
 			}
 
 			RowLayout {
@@ -53,15 +63,17 @@ Scope {
 					bottom: parent.bottom
 				}
 
-				Audio {}
-
-				Mpris {}
-
 				Bluetooth {}
+
+				Splitter {}
 
 				Network {}
 
+				Splitter {}
+
 				Battery {}
+
+				Splitter {}
 
 				Hardware {}
 			}
