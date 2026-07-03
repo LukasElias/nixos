@@ -17,17 +17,31 @@ RowLayout {
 		return players[0]
 	}
 
-	property var players: Mpris.players.values
+	readonly property var players: Mpris.players.values
 
-	property MprisPlayer activePlayer: root.pickPlayer(root.players)
+	readonly property MprisPlayer activePlayer: root.pickPlayer(root.players)
 
-	property string trackTitle: activePlayer.trackTitle
-	property string trackArtist: activePlayer.trackArtist
-	property string trackAlbum: activePlayer.trackAlbum
-	property string trackArtUrl: activePlayer.trackArtUrl
+	readonly property string trackTitle: activePlayer.trackTitle
+	readonly property string trackArtist: activePlayer.trackArtist
+	readonly property string trackAlbum: activePlayer.trackAlbum
+	readonly property string trackArtUrl: activePlayer.trackArtUrl
+
+	readonly property bool playing: activePlayer.isPlaying
+
+	readonly property string playingIcon: {
+		if (!activePlayer) return ""
+		if (playing) return String.fromCodePoint(0xf03e5) // Pause icon
+		if (!playing) return String.fromCodePoint(0xf040c) // Play icon
+	}
+	readonly property string playerText: {
+		if (!activePlayer) return ""
+		if (trackArtist) return `${playingIcon} ${trackTitle} - ${trackArtist}`
+
+		return `${playingIcon} ${trackTitle}`
+	}
 
 	Text {
-		text: root.trackTitle + " - " + root.trackArtist
+		text: root.playerText
 		color: `#${Config.palette.base05}`
 		font: Config.font
 	}
