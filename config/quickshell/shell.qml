@@ -12,4 +12,6 @@ ShellRoot {
 
 		delegate: Bar {}
 	}
+
+	Notifications {}
 }
