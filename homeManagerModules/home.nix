@@ -51,25 +51,7 @@
     EDITOR = "nvim";
   };
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "LukasElias";
-      user.email = "lukaslundmajland@gmail.com";
-    };
-  };
-
   programs.gh.enable = true;
-
-  programs.bash = {
-    enable = true;
-    historySize = 1000;
-    historyFileSize = 10000;
-    shellAliases = {
-      ls = "ls --color";
-      grep = "grep --color";
-    };
-  };
 
   programs.dircolors = {
     enable = true;
@@ -95,5 +77,12 @@
   quickshell = {
     enable = true;
     font.name = "AgaveNerdFont";
+  };
+
+  git.enable = true;
+
+  bash = {
+    enable = true;
+    enableColorAliases = true;
   };
 }

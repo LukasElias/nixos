@@ -1,7 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
   ...
 }: {
   imports = [
@@ -10,5 +7,7 @@
     ./kitty.nix
     ./nvim.nix
     ./quickshell.nix
+    ./git.nix
+    ./bash.nix
   ];
 }

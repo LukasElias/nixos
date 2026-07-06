@@ -5,7 +5,7 @@
   ...
 }: {
   options.quickshell = {
-    enable = lib.mkEnableOption "enable Quickshell";
+    enable = lib.mkEnableOption "quickshell";
     configName = lib.mkOption {
       type = lib.types.str;
       default = "default";
