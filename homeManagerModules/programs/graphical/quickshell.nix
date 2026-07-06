@@ -59,7 +59,7 @@
       name = "quickshellConfig";
       paths = [
         quickshellConfigFile
-        ../config/quickshell
+        ../../../config/quickshell
       ];
     };
   in {

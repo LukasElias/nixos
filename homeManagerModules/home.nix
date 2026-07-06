@@ -68,18 +68,4 @@
   };
 
   programs.home-manager.enable = true;
-
-  quickshell = {
-    enable = true;
-    font.name = "AgaveNerdFont";
-  };
-
-  git.enable = true;
-
-  bash = {
-    enable = true;
-    enableColorAliases = true;
-  };
-
-  starship.enable = true;
 }
