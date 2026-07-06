@@ -50,6 +50,10 @@
         family: "${config.quickshell.font.name}",
         pixelSize: ${lib.toString config.quickshell.font.size}
       }
+
+      const notifications = {
+        timeout: 5000
+      }
     '';
     quickshellConfigDrv = pkgs.symlinkJoin {
       name = "quickshellConfig";
