@@ -58,11 +58,6 @@
     enableBashIntegration = true;
   };
 
-  programs.starship = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-
   services.udiskie = {
     enable = true;
     settings = {
@@ -85,4 +80,6 @@
     enable = true;
     enableColorAliases = true;
   };
+
+  starship.enable = true;
 }

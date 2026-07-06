@@ -9,5 +9,6 @@
     ./quickshell.nix
     ./git.nix
     ./bash.nix
+    ./starship.nix
   ];
 }
