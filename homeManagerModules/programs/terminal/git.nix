@@ -2,9 +2,7 @@
   lib,
   config,
   ...
-}:
-
-{
+}: {
   options.git = {
     enable = lib.mkEnableOption "git";
     name = lib.mkOption {

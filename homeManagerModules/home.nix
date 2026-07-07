@@ -29,9 +29,7 @@
     colorScheme = "dark";
   };
 
-  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    nerd-fonts.agave
     fd
     ripgrep
   ];
@@ -68,4 +66,6 @@
   };
 
   programs.home-manager.enable = true;
+
+  myFont.enable = true;
 }

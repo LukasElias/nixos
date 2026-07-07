@@ -2,9 +2,7 @@
   lib,
   config,
   ...
-}:
-
-{
+}: {
   options.bash = {
     enable = lib.mkEnableOption "bash";
     enableColorAliases = lib.mkEnableOption "bash color aliases";

@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{config, ...}: {
   imports = [
     ./kitty.nix
     ./quickshell.nix
@@ -8,14 +6,14 @@
 
   quickshell = {
     enable = true;
-    font.name = "AgaveNerdFont";
+    font.name = config.myFont.defaultFonts.monospace.family;
   };
 
   kitty = {
     enable = true;
     font = {
-      name = "AgaveNerdFont";
-      package = pkgs.nerd-fonts.agave;
+      name = config.myFont.defaultFonts.monospace.family;
+      package = config.myFont.defaultFonts.monospace.package;
     };
   };
 }

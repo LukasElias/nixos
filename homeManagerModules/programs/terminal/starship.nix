@@ -2,9 +2,7 @@
   lib,
   config,
   ...
-}:
-
-{
+}: {
   options.starship = {
     enable = lib.mkEnableOption "starship";
   };
@@ -88,7 +86,7 @@
           style = "blue";
           symbol = "  ";
         };
-        buf = { symbol = " "; };
+        buf = {symbol = " ";};
         c = {
           style = "blue";
           symbol = " ";
@@ -137,7 +135,7 @@
           style = "bold red";
           tag_symbol = "  ";
         };
-        git_status = { style = "bold red"; };
+        git_status = {style = "bold red";};
         golang = {
           style = "blue";
           symbol = " ";
@@ -220,7 +218,7 @@
           style = "purple";
           symbol = " ";
         };
-        pijul_channel = { symbol = " "; };
+        pijul_channel = {symbol = " ";};
         python = {
           style = "green";
           symbol = " ";
