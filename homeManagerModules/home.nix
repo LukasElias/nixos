@@ -67,5 +67,5 @@
 
   programs.home-manager.enable = true;
 
-  myFont.enable = true;
+  myHomeManager.font.enable = true;
 }

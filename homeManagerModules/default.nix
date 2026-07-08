@@ -6,4 +6,7 @@
     ./programs/graphical
     ./programs/terminal
   ];
+
+  myHomeManager.programs.graphical.enable = true;
+  myHomeManager.programs.terminal.enable = true;
 }

@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  options.git = {
+  options.myHomeManager.programs.terminal.git = {
     enable = lib.mkEnableOption "git";
     name = lib.mkOption {
       type = lib.types.str;
@@ -15,12 +15,12 @@
     };
   };
 
-  config = lib.mkIf config.git.enable {
+  config = lib.mkIf config.myHomeManager.programs.terminal.git.enable {
     programs.git = {
       enable = true;
       settings = {
-        user.name = config.git.name;
-        user.email = config.git.email;
+        user.name = config.myHomeManager.programs.terminal.git.name;
+        user.email = config.myHomeManager.programs.terminal.git.email;
       };
     };
   };

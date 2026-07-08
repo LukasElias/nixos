@@ -1,22 +1,32 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./kitty.nix
     ./quickshell.nix
     ./firefox.nix
   ];
 
-  firefox.enable = true;
-
-  quickshell = {
-    enable = true;
-    font.name = config.myFont.defaultFonts.monospace.family;
+  options.myHomeManager.programs.graphical = {
+    enable = lib.mkEnableOption "graphical programs";
   };
 
-  kitty = {
-    enable = true;
-    font = {
-      name = config.myFont.defaultFonts.monospace.family;
-      package = config.myFont.defaultFonts.monospace.package;
+  config.myHomeManager.programs.graphical = lib.mkIf config.myHomeManager.programs.graphical.enable {
+    firefox.enable = true;
+
+    quickshell = {
+      enable = true;
+      font.name = config.myHomeManager.font.defaultFonts.monospace.family;
+    };
+
+    kitty = {
+      enable = true;
+      font = {
+        name = config.myHomeManager.font.defaultFonts.monospace.family;
+        package = config.myHomeManager.font.defaultFonts.monospace.package;
+      };
     };
   };
 }

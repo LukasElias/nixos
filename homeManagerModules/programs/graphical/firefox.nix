@@ -2,14 +2,12 @@
   config,
   lib,
   ...
-}:
-
-{
-  options.firefox = {
+}: {
+  options.myHomeManager.programs.graphical.firefox = {
     enable = lib.mkEnableOption "firefox";
   };
 
-  config = lib.mkIf config.firefox.enable {
+  config = lib.mkIf config.myHomeManager.programs.graphical.firefox.enable {
     programs.firefox.enable = true;
   };
 }

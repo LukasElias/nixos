@@ -3,11 +3,11 @@
   config,
   ...
 }: {
-  options.starship = {
+  options.myHomeManager.programs.terminal.starship = {
     enable = lib.mkEnableOption "starship";
   };
 
-  config = lib.mkIf config.starship.enable {
+  config = lib.mkIf config.myHomeManager.programs.terminal.starship.enable {
     programs.starship = {
       enable = true;
       enableBashIntegration = true;

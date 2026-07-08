@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  options.bash = {
+  options.myHomeManager.programs.terminal.bash = {
     enable = lib.mkEnableOption "bash";
     enableColorAliases = lib.mkEnableOption "bash color aliases";
     history = lib.mkOption {
@@ -24,12 +24,12 @@
     };
   };
 
-  config = lib.mkIf config.bash.enable {
+  config = lib.mkIf config.myHomeManager.programs.terminal.bash.enable {
     programs.bash = {
       enable = true;
-      historySize = config.bash.history.memorySize;
-      historyFileSize = config.bash.history.fileSize;
-      shellAliases = lib.mkIf config.bash.enableColorAliases {
+      historySize = config.myHomeManager.programs.terminal.bash.history.memorySize;
+      historyFileSize = config.myHomeManager.programs.terminal.bash.history.fileSize;
+      shellAliases = lib.mkIf config.myHomeManager.programs.terminal.bash.enableColorAliases {
         ls = "ls --color";
         grep = "grep --color";
       };

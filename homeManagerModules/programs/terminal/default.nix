@@ -1,4 +1,8 @@
-{...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./bash.nix
     ./git.nix
@@ -6,14 +10,20 @@
     ./starship.nix
   ];
 
-  git.enable = true;
-
-  bash = {
-    enable = true;
-    enableColorAliases = true;
+  options.myHomeManager.programs.terminal = {
+    enable = lib.mkEnableOption "terminal programs";
   };
 
-  starship.enable = true;
+  config.myHomeManager.programs.terminal = lib.mkIf config.myHomeManager.programs.terminal.enable {
+    git.enable = true;
 
-  nvim.enable = true;
+    bash = {
+      enable = true;
+      enableColorAliases = true;
+    };
+
+    starship.enable = true;
+
+    nvim.enable = true;
+  };
 }

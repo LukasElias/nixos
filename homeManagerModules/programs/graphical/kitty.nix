@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  options.kitty = {
+  options.myHomeManager.programs.graphical.kitty = {
     enable = lib.mkEnableOption "kitty";
     font = lib.mkOption {
       type = lib.types.submodule {
@@ -19,7 +19,7 @@
     };
   };
 
-  config = lib.mkIf config.kitty.enable {
+  config = lib.mkIf config.myHomeManager.programs.graphical.kitty.enable {
     programs.kitty = {
       enable = true;
 
@@ -57,7 +57,7 @@
         color15 = "#${config.colorScheme.palette.base07}";
       };
 
-      font = config.kitty.font;
+      font = config.myHomeManager.programs.graphical.kitty.font;
 
       shellIntegration.mode = null;
 

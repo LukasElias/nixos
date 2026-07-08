@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  options.quickshell = {
+  options.myHomeManager.programs.graphical.quickshell = {
     enable = lib.mkEnableOption "quickshell";
     configName = lib.mkOption {
       type = lib.types.str;
@@ -25,7 +25,7 @@
     };
   };
 
-  config = lib.mkIf config.quickshell.enable (let
+  config = lib.mkIf config.myHomeManager.programs.graphical.quickshell.enable (let
     quickshellConfigFile = pkgs.writeTextDir "config.js" ''
       const palette = {
         base00: "${config.colorScheme.palette.base00}",
@@ -47,8 +47,8 @@
       }
 
       const font = {
-        family: "${config.quickshell.font.name}",
-        pixelSize: ${lib.toString config.quickshell.font.size}
+        family: "${config.myHomeManager.programs.graphical.quickshell.font.name}",
+        pixelSize: ${lib.toString config.myHomeManager.programs.graphical.quickshell.font.size}
       }
 
       const notifications = {
@@ -66,9 +66,9 @@
     programs.quickshell = {
       enable = true;
       systemd.enable = true;
-      activeConfig = config.quickshell.configName;
+      activeConfig = config.myHomeManager.programs.graphical.quickshell.configName;
       configs = {
-        "${config.quickshell.configName}" = quickshellConfigDrv;
+        "${config.myHomeManager.programs.graphical.quickshell.configName}" = quickshellConfigDrv;
       };
     };
   });

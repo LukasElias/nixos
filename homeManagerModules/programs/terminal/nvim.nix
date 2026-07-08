@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-  options.nvim = {
+  options.myHomeManager.programs.terminal.nvim = {
     enable = lib.mkEnableOption "nvim";
   };
 
-  config = lib.mkIf config.nvim.enable {
+  config = lib.mkIf config.myHomeManager.programs.terminal.nvim.enable {
     xdg.configFile."nvim" = {
       source = ../../../config/nvim;
       recursive = true;
