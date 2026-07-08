@@ -2,7 +2,10 @@
   imports = [
     ./kitty.nix
     ./quickshell.nix
+    ./firefox.nix
   ];
+
+  firefox.enable = true;
 
   quickshell = {
     enable = true;

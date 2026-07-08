@@ -54,14 +54,15 @@
     };
   };
 
-  config = lib.mkIf config.myFont.enable
-  (let
-    filteredFonts = lib.filterAttrs (_: fonts: fonts != null) config.myFont.defaultFonts;
-  in {
-    fonts.fontconfig.enable = true;
+  config =
+    lib.mkIf config.myFont.enable
+    (let
+      filteredFonts = lib.filterAttrs (_: fonts: fonts != null) config.myFont.defaultFonts;
+    in {
+      fonts.fontconfig.enable = true;
 
-    fonts.fontconfig.defaultFonts = lib.mapAttrs (_: fontConfig: [fontConfig.family]) filteredFonts;
+      fonts.fontconfig.defaultFonts = lib.mapAttrs (_: fontConfig: [fontConfig.family]) filteredFonts;
 
-    home.packages = lib.mapAttrsToList (_: fontConfig: fontConfig.package) filteredFonts;
-  });
+      home.packages = lib.mapAttrsToList (_: fontConfig: fontConfig.package) filteredFonts;
+    });
 }
