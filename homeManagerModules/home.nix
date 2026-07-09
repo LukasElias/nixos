@@ -1,6 +1,6 @@
 {
-  config,
   inputs,
+  lib,
   pkgs,
   ...
 }: {
@@ -27,6 +27,15 @@
   home.packages = with pkgs; [
     fd
     ripgrep
+    fuzzel
+    stow
+    spotify
+    playerctl
+    wlogout
+    fastfetch
+    unzip
+    yazi
+    brightnessctl
   ];
 
   home.sessionVariables = {
@@ -34,4 +43,9 @@
   };
 
   programs.home-manager.enable = true;
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "spotify"
+    ];
 }

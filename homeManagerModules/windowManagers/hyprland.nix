@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: {
@@ -306,5 +307,9 @@
             10);
       };
     };
+
+    home.packages = with pkgs; [
+      hyprshutdown
+    ];
   };
 }
