@@ -18,14 +18,14 @@
 
     quickshell = {
       enable = true;
-      font.name = config.myHomeManager.font.defaultFonts.monospace.family;
+      font.name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
     };
 
     kitty = {
       enable = true;
       font = {
-        name = config.myHomeManager.font.defaultFonts.monospace.family;
-        package = config.myHomeManager.font.defaultFonts.monospace.package;
+        name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
+        package = config.myHomeManager.theme.font.defaultFonts.monospace.package;
       };
     };
   };

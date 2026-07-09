@@ -24,11 +24,6 @@
   # release notes.
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
-  gtk = {
-    enable = true;
-    colorScheme = "dark";
-  };
-
   home.packages = with pkgs; [
     fd
     ripgrep
@@ -66,6 +61,4 @@
   };
 
   programs.home-manager.enable = true;
-
-  myHomeManager.font.enable = true;
 }

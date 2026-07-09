@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  options.myHomeManager.font = {
+  options.myHomeManager.theme.font = {
     enable = lib.mkEnableOption "font config";
 
     defaultFonts = {
@@ -55,9 +55,9 @@
   };
 
   config =
-    lib.mkIf config.myHomeManager.font.enable
+    lib.mkIf config.myHomeManager.theme.font.enable
     (let
-      filteredFonts = lib.filterAttrs (_: fonts: fonts != null) config.myHomeManager.font.defaultFonts;
+      filteredFonts = lib.filterAttrs (_: fonts: fonts != null) config.myHomeManager.theme.font.defaultFonts;
     in {
       fonts.fontconfig.enable = true;
 
