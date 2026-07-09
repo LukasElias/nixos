@@ -34,30 +34,8 @@
   home.file = {
   };
 
-  dconf.settings = {
-    "org/gnome/desktop/peripherals/mouse" = {
-      natural-scroll = true;
-    };
-  };
-
   home.sessionVariables = {
     EDITOR = "nvim";
-  };
-
-  programs.gh.enable = true;
-
-  programs.dircolors = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-
-  services.udiskie = {
-    enable = true;
-    settings = {
-      program_options = {
-        file_manager = "${pkgs.kitty}/bin/kitty ${pkgs.yazi}/bin/yazi";
-      };
-    };
   };
 
   programs.home-manager.enable = true;

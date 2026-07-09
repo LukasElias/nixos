@@ -5,6 +5,8 @@
 }: {
   imports = [
     ./bash.nix
+    ./dircolors.nix
+    ./gh.nix
     ./git.nix
     ./nvim.nix
     ./starship.nix
@@ -15,15 +17,18 @@
   };
 
   config.myHomeManager.programs.terminal = lib.mkIf config.myHomeManager.programs.terminal.enable {
-    git.enable = true;
-
     bash = {
-      enable = true;
-      enableColorAliases = true;
+      enable = lib.mkDefault true;
+      enableColorAliases = lib.mkDefault true;
     };
 
-    starship.enable = true;
+    dircolors.enable = lib.mkDefault true;
 
-    nvim.enable = true;
+    gh.enable = lib.mkDefault true;
+    git.enable = lib.mkDefault true;
+
+    nvim.enable = lib.mkDefault true;
+
+    starship.enable = lib.mkDefault true;
   };
 }
