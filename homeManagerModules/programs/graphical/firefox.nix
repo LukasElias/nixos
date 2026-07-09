@@ -8,6 +8,9 @@
   };
 
   config = lib.mkIf config.myHomeManager.programs.graphical.firefox.enable {
-    programs.firefox.enable = true;
+    programs.firefox = {
+      enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
+    };
   };
 }
