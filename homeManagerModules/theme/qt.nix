@@ -1,4 +1,8 @@
-{config, lib, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   qtctSettings = {
     Appearance = {
       icon_theme = "Adwaita";

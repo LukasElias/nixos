@@ -14,15 +14,15 @@
   };
 
   config.myHomeManager.programs.graphical = lib.mkIf config.myHomeManager.programs.graphical.enable {
-    firefox.enable = true;
+    firefox.enable = lib.mkDefault true;
 
     quickshell = {
-      enable = true;
+      enable = lib.mkDefault true;
       font.name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
     };
 
     kitty = {
-      enable = true;
+      enable = lib.mkDefault true;
       font = {
         name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
         package = config.myHomeManager.theme.font.defaultFonts.monospace.package;

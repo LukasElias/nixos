@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   imports = [
     ./home.nix
     ./hyprland.nix
@@ -7,7 +7,7 @@
     ./programs/terminal
   ];
 
-  myHomeManager.programs.graphical.enable = true;
-  myHomeManager.programs.terminal.enable = true;
-  myHomeManager.theme.enable = true;
+  myHomeManager.programs.graphical.enable = lib.mkDefault true;
+  myHomeManager.programs.terminal.enable = lib.mkDefault true;
+  myHomeManager.theme.enable = lib.mkDefault true;
 }
