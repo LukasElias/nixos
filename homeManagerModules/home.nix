@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   lib,
   pkgs,
   ...
@@ -13,7 +14,7 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "LukasElias";
-  home.homeDirectory = "/home/LukasElias";
+  home.homeDirectory = "/home/${config.home.username}";
 
   home.packages = with pkgs; [
     fd

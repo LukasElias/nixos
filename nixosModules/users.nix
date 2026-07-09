@@ -1,17 +1,25 @@
-{inputs, ...}: {
-  users.users.LukasElias = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "seat"
-      "plugdev"
-    ];
+{config, lib, inputs, ...}: {
+  options.myNixos.users = {
+    enable = lib.mkEnableOption "user & homeManager setup";
+    name = lib.mkOption {
+      type = lib.types.str;
+      default = "LukasElias";
+    };
   };
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "LukasElias" = import ./../homeManagerModules;
+  config = lib.mkIf config.myNixos.users.enable {
+    users.users."${config.myNixos.users.name}" = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "seat"
+        "plugdev"
+      ];
+    };
+
+    home-manager = {
+      extraSpecialArgs = {inherit inputs;};
+      users."${config.myNixos.users.name}" = import ./../homeManagerModules;
     };
   };
 }

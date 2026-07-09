@@ -11,5 +11,6 @@
   myNixos = {
     services.enable = lib.mkDefault true;
     hardware.enable = lib.mkDefault true;
+    users.enable = lib.mkDefault true;
   };
 }
