@@ -1,4 +1,8 @@
-{config, lib, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   options.myNixos.hardware.graphics = {
     enable = lib.mkEnableOption "graphics";
   };

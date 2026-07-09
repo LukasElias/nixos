@@ -1,4 +1,8 @@
-{config, lib, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   options.myNixos.hardware.bluetooth = {
     enable = lib.mkEnableOption "bluetooth";
   };
