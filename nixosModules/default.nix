@@ -1,6 +1,6 @@
 {lib, ...}: {
   imports = [
-    ./hardware.nix
+    ./hardware
     ./locale.nix
     ./nix.nix
     ./packages.nix
@@ -8,5 +8,8 @@
     ./users.nix
   ];
 
-  myNixos.services.enable = lib.mkDefault true;
+  myNixos = {
+    services.enable = lib.mkDefault true;
+    hardware.enable = lib.mkDefault true;
+  };
 }

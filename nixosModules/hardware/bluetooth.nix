@@ -1,10 +1,10 @@
-{...}: {
-  hardware = {
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-    bluetooth = {
+{config, lib, ...}: {
+  options.myNixos.hardware.bluetooth = {
+    enable = lib.mkEnableOption "bluetooth";
+  };
+
+  config = lib.mkIf config.myNixos.hardware.bluetooth.enable {
+    hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
       settings = {
