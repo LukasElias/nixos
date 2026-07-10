@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -14,6 +18,8 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.blacklistedKernelModules = ["ideapad_laptop"];
+
+  boot.extraModprobeConfig = "options amd_pmc enable_stb=1";
 
   networking.hostName = "LukasLaptop"; # Define your hostname.
 
