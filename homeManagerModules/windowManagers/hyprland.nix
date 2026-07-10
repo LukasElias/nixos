@@ -223,7 +223,7 @@
               mainMod = false;
             })
 
-            # requires playerctl
+            # Binds for media
             (bindKey {
               key = "XF86AudioNext";
               dispatcher = " hl.dsp.exec_cmd(\"playerctl next\")";
@@ -277,6 +277,7 @@
               flags.mouse = true;
             })
           ]
+
           # Binds for windows
           ++ (lib.mapAttrsToList (key: direction:
             bindKey {
@@ -290,6 +291,7 @@
               dispatcher = "hl.dsp.window.move({ direction = \"${direction}\" })";
             })
           directionKeys)
+
           # Binds for workspaces
           ++ (lib.genList
             (i:
@@ -310,6 +312,8 @@
 
     home.packages = with pkgs; [
       hyprshutdown
+      playerctl
+      brightnessctl
     ];
   };
 }

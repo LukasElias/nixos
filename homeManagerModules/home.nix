@@ -19,12 +19,10 @@
     fuzzel
     stow
     spotify
-    playerctl
     wlogout
     fastfetch
     unzip
     yazi
-    brightnessctl
   ];
 
   home.sessionVariables = {
