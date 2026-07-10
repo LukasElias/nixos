@@ -11,9 +11,6 @@
 
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "LukasElias";
   home.homeDirectory = "/home/${config.home.username}";
 
   home.packages = with pkgs; [

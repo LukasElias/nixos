@@ -19,7 +19,13 @@
 
     home-manager = {
       extraSpecialArgs = {inherit inputs;};
-      users."${config.myNixos.users.name}" = import ./../homeManagerModules;
+      users."${config.myNixos.users.name}" = {
+        imports = [
+          ./../homeManagerModules
+        ];
+
+        home.username = config.myNixos.users.name;
+      };
     };
   };
 }
