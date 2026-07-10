@@ -1,4 +1,9 @@
-{config, lib, inputs, ...}: {
+{
+  config,
+  lib,
+  inputs,
+  ...
+}: {
   options.myNixos.users = {
     enable = lib.mkEnableOption "user & homeManager setup";
     name = lib.mkOption {
