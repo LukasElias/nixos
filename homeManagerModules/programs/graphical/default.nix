@@ -4,9 +4,10 @@
   ...
 }: {
   imports = [
+    ./firefox.nix
     ./kitty.nix
     ./quickshell.nix
-    ./firefox.nix
+    ./steam.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -15,6 +16,14 @@
 
   config.myHomeManager.programs.graphical = lib.mkIf config.myHomeManager.programs.graphical.enable {
     firefox.enable = lib.mkDefault true;
+
+    kitty = {
+      enable = lib.mkDefault true;
+      font = lib.mkDefault {
+        name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
+        package = config.myHomeManager.theme.font.defaultFonts.monospace.package;
+      };
+    };
 
     quickshell = {
       enable = lib.mkDefault true;
@@ -53,12 +62,6 @@
       ];
     };
 
-    kitty = {
-      enable = lib.mkDefault true;
-      font = lib.mkDefault {
-        name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
-        package = config.myHomeManager.theme.font.defaultFonts.monospace.package;
-      };
-    };
+    steam.enable = lib.mkDefault true;
   };
 }
