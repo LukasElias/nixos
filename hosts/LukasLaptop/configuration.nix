@@ -40,6 +40,9 @@
     # release notes.
     home.stateVersion = "25.11"; # Please read the comment before changing.
 
-    myHomeManager.programs.graphical.steam.enable = lib.mkForce false;
+    myHomeManager.programs.graphical = {
+      steam.enable = lib.mkForce false;
+      blender.enable = lib.mkForce false;
+    };
   };
 }

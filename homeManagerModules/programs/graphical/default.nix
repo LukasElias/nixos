@@ -8,6 +8,7 @@
     ./kitty.nix
     ./quickshell.nix
     ./steam.nix
+    ./blender.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -63,5 +64,7 @@
     };
 
     steam.enable = lib.mkDefault true;
+
+    blender.enable = lib.mkDefault true;
   };
 }
