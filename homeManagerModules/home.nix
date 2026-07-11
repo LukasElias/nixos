@@ -1,7 +1,6 @@
 {
   inputs,
   config,
-  lib,
   pkgs,
   ...
 }: {
@@ -21,7 +20,6 @@
     spotify
     fastfetch
     unzip
-    yazi
     libnotify
   ];
 

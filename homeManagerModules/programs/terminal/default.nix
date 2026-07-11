@@ -10,6 +10,7 @@
     ./git.nix
     ./nvim.nix
     ./starship.nix
+    ./yazi.nix
   ];
 
   options.myHomeManager.programs.terminal = {
@@ -30,5 +31,7 @@
     nvim.enable = lib.mkDefault true;
 
     starship.enable = lib.mkDefault true;
+
+    yazi.enable = lib.mkDefault true;
   };
 }
