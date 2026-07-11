@@ -18,12 +18,44 @@
 
     quickshell = {
       enable = lib.mkDefault true;
-      font.name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
+      font.name = lib.mkDefault config.myHomeManager.theme.font.defaultFonts.monospace.family;
+      logoutmenuButtons = lib.mkDefault [
+        {
+          text = "Lock";
+          keybind = "l";
+          command = "notify-send 'lock'";
+        }
+        {
+          text = "Shutdown";
+          keybind = "s";
+          command = "hyprshutdown --post-cmd 'systemctl poweroff'";
+        }
+        {
+          text = "Reboot";
+          keybind = "r";
+          command = "hyprshutdown --post-cmd 'systemctl reboot'";
+        }
+        {
+          text = "Hibernate";
+          keybind = "h";
+          command = "systemctl hibernate";
+        }
+        {
+          text = "Logout";
+          keybind = "o";
+          command = "hyprshutdown";
+        }
+        {
+          text = "Suspend";
+          keybind = "u";
+          command = "systemctl suspend";
+        }
+      ];
     };
 
     kitty = {
       enable = lib.mkDefault true;
-      font = {
+      font = lib.mkDefault {
         name = config.myHomeManager.theme.font.defaultFonts.monospace.family;
         package = config.myHomeManager.theme.font.defaultFonts.monospace.package;
       };

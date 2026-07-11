@@ -21,6 +21,8 @@
         menu._var = "fuzzel";
         music_player._var = "spotify";
         browser._var = "firefox";
+        logoutmenu._var = "qs ipc call logoutmenu toggle";
+        notification_center._var = "qs ipc call notifications toggle";
 
         monitor = {
           output = "eDP-1";
@@ -138,7 +140,11 @@
             })
             (bindKey {
               key = "M";
-              dispatcher = "hl.dsp.exec_cmd(\"wlogout -s\")";
+              dispatcher = "hl.dsp.exec_cmd(logoutmenu)";
+            })
+            (bindKey {
+              key = "N";
+              dispatcher = "hl.dsp.exec_cmd(notification_center)";
             })
             (bindKey {
               key = "V";

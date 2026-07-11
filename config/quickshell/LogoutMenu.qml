@@ -43,6 +43,11 @@ Scope {
 			left: true
 		}
 
+		Shortcut {
+			sequences: ["q", "Escape"]
+			onActivated: root.menuOpen = false;
+		}
+
 		Rectangle {
 			anchors.fill: parent
 			anchors.margins: 200;
@@ -92,6 +97,7 @@ Scope {
 
 						function activate() {
 							command.running = true;
+							root.menuOpen = false;
 						}
 
 						Process {

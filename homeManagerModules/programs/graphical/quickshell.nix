@@ -23,6 +23,15 @@
         };
       };
     };
+    logoutmenuButtons = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          text = lib.mkOption { type = lib.types.str; };
+          keybind = lib.mkOption { type = lib.types.str; };
+          command = lib.mkOption { type = lib.types.str; };
+        };
+      });
+    };
   };
 
   config = lib.mkIf config.myHomeManager.programs.graphical.quickshell.enable (let
@@ -56,38 +65,7 @@
       }
 
       const logoutmenu = {
-        buttons: [
-          {
-            text: "Lock",
-            keybind: "l",
-            command: "notify-send \"lock\""
-          },
-          {
-            text: "Shutdown",
-            keybind: "s",
-            command: "notify-send \"shutdown\""
-          },
-          {
-            text: "Reboot",
-            keybind: "r",
-            command: "notify-send \"reboot\""
-          },
-          {
-            text: "Hibernate",
-            keybind: "h",
-            command: "notify-send \"hibernate\""
-          },
-          {
-            text: "Logout",
-            keybind: "o",
-            command: "notify-send \"logout\""
-          },
-          {
-            text: "Suspend",
-            keybind: "u",
-            command: "notify-send \"suspend\""
-          }
-        ]
+        buttons: ${lib.toJSON config.myHomeManager.programs.graphical.quickshell.logoutmenuButtons}
       }
     '';
     quickshellConfigDrv = pkgs.symlinkJoin {

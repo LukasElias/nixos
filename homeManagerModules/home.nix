@@ -19,7 +19,6 @@
     fuzzel
     stow
     spotify
-    wlogout
     fastfetch
     unzip
     yazi
