@@ -283,7 +283,6 @@
               flags.mouse = true;
             })
           ]
-
           # Binds for windows
           ++ (lib.mapAttrsToList (key: direction:
             bindKey {
@@ -297,7 +296,6 @@
               dispatcher = "hl.dsp.window.move({ direction = \"${direction}\" })";
             })
           directionKeys)
-
           # Binds for workspaces
           ++ (lib.genList
             (i:

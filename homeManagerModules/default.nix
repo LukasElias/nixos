@@ -1,6 +1,7 @@
 {lib, ...}: {
   imports = [
     ./home.nix
+    ./xdg.nix
     ./theme
     ./services
     ./programs/graphical
@@ -14,5 +15,6 @@
     theme.enable = lib.mkDefault true;
     services.enable = lib.mkDefault true;
     windowManagers.enable = lib.mkDefault true;
+    xdg.enable = lib.mkDefault true;
   };
 }
