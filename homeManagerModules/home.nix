@@ -23,6 +23,7 @@
     fastfetch
     unzip
     yazi
+    libnotify
   ];
 
   home.sessionVariables = {

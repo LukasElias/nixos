@@ -54,6 +54,41 @@
       const notifications = {
         timeout: 5000
       }
+
+      const logoutmenu = {
+        buttons: [
+          {
+            text: "Lock",
+            keybind: "l",
+            command: "notify-send \"lock\""
+          },
+          {
+            text: "Shutdown",
+            keybind: "s",
+            command: "notify-send \"shutdown\""
+          },
+          {
+            text: "Reboot",
+            keybind: "r",
+            command: "notify-send \"reboot\""
+          },
+          {
+            text: "Hibernate",
+            keybind: "h",
+            command: "notify-send \"hibernate\""
+          },
+          {
+            text: "Logout",
+            keybind: "o",
+            command: "notify-send \"logout\""
+          },
+          {
+            text: "Suspend",
+            keybind: "u",
+            command: "notify-send \"suspend\""
+          }
+        ]
+      }
     '';
     quickshellConfigDrv = pkgs.symlinkJoin {
       name = "quickshellConfig";

@@ -14,4 +14,6 @@ ShellRoot {
 	}
 
 	Notifications {}
+
+	LogoutMenu {}
 }
