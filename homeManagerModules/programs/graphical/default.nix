@@ -34,7 +34,7 @@
         {
           text = "Lock";
           keybind = "l";
-          command = "notify-send 'lock'";
+          command = "pidof hyprlock || hyprlock";
         }
         {
           text = "Shutdown";
