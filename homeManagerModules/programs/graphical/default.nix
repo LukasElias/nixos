@@ -9,6 +9,7 @@
     ./quickshell.nix
     ./steam.nix
     ./blender.nix
+    ./hyprlock.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -62,6 +63,8 @@
         }
       ];
     };
+
+    hyprlock.enable = lib.mkDefault true;
 
     steam.enable = lib.mkDefault true;
 
