@@ -25,12 +25,21 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages."${system}";
   in {
-    nixosConfigurations.LukasLaptop = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/LukasLaptop/configuration.nix
-        inputs.home-manager.nixosModules.default
-      ];
+    nixosConfigurations = {
+      LukasLaptop = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/LukasLaptop/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+      LukasPC = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/LukasPC/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
     };
     devShells."${system}".default = pkgs.mkShell {
       packages = with pkgs; [
