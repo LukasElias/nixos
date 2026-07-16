@@ -34,32 +34,54 @@
         {
           text = "Lock";
           keybind = "l";
-          command = "pidof hyprlock || hyprlock";
+          command = [
+            "sh"
+            "-c"
+            "pidof hyprlock || hyprlock"
+          ];
         }
         {
           text = "Shutdown";
           keybind = "s";
-          command = "hyprshutdown --post-cmd 'systemctl poweroff'";
+          command = [
+            "hyprctl"
+            "dispatch"
+            "hl.dsp.exec_cmd(\"hyprshutdown --post-cmd 'systemctl poweroff'\")"
+          ];
         }
         {
           text = "Reboot";
           keybind = "r";
-          command = "hyprshutdown --post-cmd 'systemctl reboot'";
+          command = [
+            "hyprctl"
+            "dispatch"
+            "hl.dsp.exec_cmd(\"hyprshutdown -t 'Rebooting...' --post-cmd 'systemctl reboot'\")"
+          ];
         }
         {
           text = "Hibernate";
           keybind = "h";
-          command = "systemctl hibernate";
+          command = [
+            "systemctl"
+            "hibernate"
+          ];
         }
         {
           text = "Logout";
           keybind = "o";
-          command = "hyprshutdown";
+          command = [
+            "hyprctl"
+            "dispatch"
+            "hl.dsp.exec_cmd(\"hyprshutdown -t 'Logging out...'\")"
+          ];
         }
         {
           text = "Suspend";
           keybind = "u";
-          command = "systemctl suspend";
+          command = [
+            "systemctl"
+            "suspend"
+          ];
         }
       ];
     };

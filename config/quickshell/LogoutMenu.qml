@@ -96,14 +96,13 @@ Scope {
 						}
 
 						function activate() {
-							command.running = true;
+							command.startDetached();
 							root.menuOpen = false;
 						}
 
 						Process {
 							id: command
-							running: false
-							command: ["sh", "-c", card.modelData.command]
+							command: card.modelData.command
 						}
 					}
 				}

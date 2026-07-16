@@ -28,7 +28,7 @@
         options = {
           text = lib.mkOption {type = lib.types.str;};
           keybind = lib.mkOption {type = lib.types.str;};
-          command = lib.mkOption {type = lib.types.str;};
+          command = lib.mkOption {type = lib.types.listOf lib.types.str;};
         };
       });
     };
