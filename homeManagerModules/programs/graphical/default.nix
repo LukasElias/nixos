@@ -12,6 +12,7 @@
     ./hyprlock.nix
     ./prismlauncher.nix
     ./discord.nix
+    ./spotify.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -97,5 +98,7 @@
     prismlauncher.enable = lib.mkDefault true;
 
     discord.enable = lib.mkDefault true;
+
+    spotify.enable = lib.mkDefault true;
   };
 }

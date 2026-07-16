@@ -17,7 +17,6 @@
     ripgrep
     fuzzel
     stow
-    spotify
     fastfetch
     unzip
     libnotify
