@@ -10,6 +10,7 @@
     ./steam.nix
     ./blender.nix
     ./hyprlock.nix
+    ./prismlauncher.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -91,5 +92,7 @@
     steam.enable = lib.mkDefault true;
 
     blender.enable = lib.mkDefault true;
+
+    prismlauncher.enable = lib.mkDefault true;
   };
 }

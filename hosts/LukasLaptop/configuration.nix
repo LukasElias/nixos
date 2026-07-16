@@ -43,6 +43,7 @@
     myHomeManager.programs.graphical = {
       steam.enable = lib.mkForce false;
       blender.enable = lib.mkForce false;
+      prismlauncher.enable = lib.mkForce false;
     };
   };
 }
