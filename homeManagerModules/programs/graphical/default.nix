@@ -11,6 +11,7 @@
     ./blender.nix
     ./hyprlock.nix
     ./prismlauncher.nix
+    ./discord.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -94,5 +95,7 @@
     blender.enable = lib.mkDefault true;
 
     prismlauncher.enable = lib.mkDefault true;
+    
+    discord.enable = lib.mkDefault true;
   };
 }
