@@ -21,6 +21,9 @@
         menu._var = "fuzzel";
         music_player._var = "spotify";
         browser._var = "firefox";
+        discord = lib.mkIf config.myHomeManager.programs.graphical.discord.enable {
+          _var = "discord";
+        };
         logoutmenu._var = "qs ipc call logoutmenu toggle";
         notification_center._var = "qs ipc call notifications toggle";
 
@@ -37,6 +40,7 @@
             (lib.generators.mkLuaInline ''              function ()
                             hl.exec_cmd(music_player)
                             hl.exec_cmd(browser)
+                            ${lib.optionalString config.myHomeManager.programs.graphical.discord.enable "hl.exec_cmd(discord)"}
                           end'')
           ];
         };
@@ -100,6 +104,11 @@
             match.initial_class = lib.generators.mkLuaInline "\"(?i)\" .. music_player";
             workspace = "3 silent";
           }
+          (lib.optionalAttrs config.myHomeManager.programs.graphical.discord.enable {
+            name = "Discord on workspace 4";
+            match.initial_class = lib.generators.mkLuaInline "\"(?i)\" .. discord";
+            workspace = "4 silent";
+          })
         ];
 
         # ----------------binds-----------------

@@ -95,7 +95,7 @@
     blender.enable = lib.mkDefault true;
 
     prismlauncher.enable = lib.mkDefault true;
-    
+
     discord.enable = lib.mkDefault true;
   };
 }
