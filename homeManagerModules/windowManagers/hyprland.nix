@@ -174,7 +174,7 @@
             # bindMainMod { key = "E"; dispatcher = "hl.dsp.exec_cmd(bemoji -t)"; }
             (bindKey {
               key = "C";
-              dispatcher = "hl.dsp.window.kill()";
+              dispatcher = "hl.dsp.window.close()";
             })
             (bindKey {
               key = "P";
