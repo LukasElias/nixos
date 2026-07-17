@@ -24,6 +24,9 @@
         discord = lib.mkIf config.myHomeManager.programs.graphical.discord.enable {
           _var = "discord";
         };
+        synologyDriveClient = lib.mkIf config.myHomeManager.programs.graphical.synologyDriveClient.enable {
+          _var = "synology-drive";
+        };
         logoutmenu._var = "qs ipc call logoutmenu toggle";
         notification_center._var = "qs ipc call notifications toggle";
 
@@ -41,6 +44,7 @@
                             hl.exec_cmd(music_player)
                             hl.exec_cmd(browser)
                             ${lib.optionalString config.myHomeManager.programs.graphical.discord.enable "hl.exec_cmd(discord)"}
+                            ${lib.optionalString config.myHomeManager.programs.graphical.synologyDriveClient.enable "hl.exec_cmd(synologyDriveClient)"}
                           end'')
           ];
         };

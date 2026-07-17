@@ -14,6 +14,7 @@
     ./quickshell.nix
     ./spotify.nix
     ./steam.nix
+    ./synologyDriveClient.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -103,5 +104,7 @@
     spotify.enable = lib.mkDefault true;
 
     keepassxc.enable = lib.mkDefault true;
+
+    synologyDriveClient.enable = lib.mkDefault true;
   };
 }
