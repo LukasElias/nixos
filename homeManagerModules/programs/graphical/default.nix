@@ -4,15 +4,16 @@
   ...
 }: {
   imports = [
-    ./firefox.nix
-    ./kitty.nix
-    ./quickshell.nix
-    ./steam.nix
     ./blender.nix
-    ./hyprlock.nix
-    ./prismlauncher.nix
     ./discord.nix
+    ./firefox.nix
+    ./hyprlock.nix
+    ./keepassxc.nix
+    ./kitty.nix
+    ./prismlauncher.nix
+    ./quickshell.nix
     ./spotify.nix
+    ./steam.nix
   ];
 
   options.myHomeManager.programs.graphical = {
@@ -100,5 +101,7 @@
     discord.enable = lib.mkDefault true;
 
     spotify.enable = lib.mkDefault true;
+
+    keepassxc.enable = lib.mkDefault true;
   };
 }
