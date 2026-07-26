@@ -99,7 +99,7 @@
         };
 
         settings = {
-          "browser.backup.restore.enabled" = true;
+          "browser.startup.page" = 3;
           "browser.smartwindow.sidebar.openByDefault" = false;
           "browser.newtabpage.activity-stream.widgets.weather.enabled" = false;
           "browser.newtabpage.activity-stream.feeds.topsites" = false;
