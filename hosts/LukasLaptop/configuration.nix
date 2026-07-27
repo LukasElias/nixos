@@ -45,6 +45,7 @@
     home.stateVersion = "25.11"; # Please read the comment before changing.
 
     myHomeManager.programs.graphical = {
+      handbrake.enable = lib.mkForce false;
       steam.enable = lib.mkForce false;
       blender.enable = lib.mkForce false;
       prismlauncher.enable = lib.mkForce false;

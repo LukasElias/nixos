@@ -7,6 +7,7 @@
     ./blender.nix
     ./discord.nix
     ./firefox.nix
+    ./handbrake.nix
     ./hyprlock.nix
     ./keepassxc.nix
     ./kitty.nix
@@ -92,6 +93,8 @@
     };
 
     hyprlock.enable = lib.mkDefault true;
+
+    handbrake.enable = lib.mkDefault true;
 
     steam.enable = lib.mkDefault true;
 
