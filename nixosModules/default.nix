@@ -7,6 +7,7 @@
     ./services
     ./pam.nix
     ./users.nix
+    ./smb.nix
   ];
 
   myNixos = {
@@ -14,5 +15,6 @@
     hardware.enable = lib.mkDefault true;
     users.enable = lib.mkDefault true;
     pam.enable = lib.mkDefault true;
+    smb.enable = lib.mkDefault true;
   };
 }
