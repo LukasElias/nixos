@@ -5,7 +5,7 @@
 }: {
   imports = [
     ./blueman.nix
-    ./greetd.nix
+    ./sysc-greet.nix
     ./libinput.nix
     ./pipewire.nix
     ./printing.nix
@@ -20,7 +20,7 @@
 
   config.myNixos.services = lib.mkIf config.myNixos.services.enable {
     blueman.enable = lib.mkDefault true;
-    greetd.enable = lib.mkDefault true;
+    sysc-greet.enable = lib.mkDefault true;
     libinput.enable = lib.mkDefault true;
     pipewire.enable = lib.mkDefault true;
     printing.enable = lib.mkDefault true;
