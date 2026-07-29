@@ -1,27 +1,23 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }: let
-  qtctSettings = {
-    Appearance = {
-      icon_theme = "Adwaita";
-      standarddialogs = "xdgdesktopportal";
-      style = "adwaita-dark";
-    };
-  };
+  cfg = config.myHomeManager.theme.qt;
 in {
   options.myHomeManager.theme.qt = {
     enable = lib.mkEnableOption "qt theme";
   };
 
-  config = lib.mkIf config.myHomeManager.theme.qt.enable {
+  config = lib.mkIf cfg.enable {
     qt = {
       enable = true;
-
-      platformTheme.name = "qtct";
-      qt5ctSettings = qtctSettings;
-      qt6ctSettings = qtctSettings;
+      platformTheme.name = "gtk3";
+      style = {
+        name = "gtk2";
+        package = pkgs.kdePackages.breeze;
+      };
     };
   };
 }
