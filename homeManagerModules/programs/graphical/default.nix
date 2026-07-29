@@ -6,6 +6,7 @@
   imports = [
     ./blender.nix
     ./discord.nix
+    ./dolphin.nix
     ./firefox.nix
     ./handbrake.nix
     ./hyprlock.nix
@@ -24,6 +25,8 @@
 
   config.myHomeManager.programs.graphical = lib.mkIf config.myHomeManager.programs.graphical.enable {
     firefox.enable = lib.mkDefault true;
+
+    dolphin.enable = lib.mkDefault true;
 
     kitty = {
       enable = lib.mkDefault true;
