@@ -51,6 +51,10 @@ Scope {
 		function close() {
 			root.notificationCenterOpen = false
 		}
+
+		function clearNotifications() {
+			history.clear()
+		}
 	}
 
 	PanelWindow {

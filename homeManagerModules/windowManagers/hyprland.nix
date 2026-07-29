@@ -28,7 +28,10 @@
           _var = "synology-drive";
         };
         logoutmenu._var = "qs ipc call logoutmenu toggle";
-        notification_center._var = "qs ipc call notifications toggle";
+        notification_center._var = {
+          toggle = "qs ipc call notifications toggle";
+          clear_notifications = "qs ipc call notifications clearNotifications";
+        };
 
         monitor = {
           output = "eDP-1";
@@ -157,7 +160,11 @@
             })
             (bindKey {
               key = "N";
-              dispatcher = "hl.dsp.exec_cmd(notification_center)";
+              dispatcher = "hl.dsp.exec_cmd(notification_center.toggle)";
+            })
+            (bindKey {
+              key = "SHIFT + N";
+              dispatcher = "hl.dsp.exec_cmd(notification_center.clear_notifications)";
             })
             (bindKey {
               key = "V";
@@ -241,8 +248,6 @@
               };
               mainMod = false;
             })
-
-            # Binds for media
             (bindKey {
               key = "XF86AudioNext";
               dispatcher = " hl.dsp.exec_cmd(\"playerctl next\")";
