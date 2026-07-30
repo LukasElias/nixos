@@ -16,4 +16,6 @@ ShellRoot {
 	Notifications {}
 
 	LogoutMenu {}
+
+	AppLauncher {}
 }
