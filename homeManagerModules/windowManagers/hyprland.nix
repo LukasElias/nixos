@@ -3,12 +3,35 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  cfg = config.myHomeManager.windowManagers.hyprland;
+in {
   options.myHomeManager.windowManagers.hyprland = {
     enable = lib.mkEnableOption "hyprland";
+    monitors = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          output = lib.mkOption {
+            type = lib.types.str;
+          };
+          mode = lib.mkOption {
+            type = lib.types.str;
+            default = "preferred";
+          };
+          position = lib.mkOption {
+            type = lib.types.str;
+            default = "auto";
+          };
+          scale = lib.mkOption {
+            type = lib.types.int;
+            default = 1;
+          };
+        };
+      });
+    };
   };
 
-  config = lib.mkIf config.myHomeManager.windowManagers.hyprland.enable {
+  config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -33,12 +56,7 @@
           clear_notifications = "qs ipc call notifications clearNotifications";
         };
 
-        monitor = {
-          output = "eDP-1";
-          mode = "1920x1200@60";
-          position = "0x0";
-          scale = 1;
-        };
+        monitor = cfg.monitors;
 
         on = {
           _args = [

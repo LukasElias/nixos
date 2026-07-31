@@ -42,5 +42,12 @@
     # want to update the value, then make sure to first check the Home Manager
     # release notes.
     home.stateVersion = "26.05"; # Please read the comment before changing.
+
+    myHomeManager.windowManagers.hyprland.monitors = [
+      {
+        output = "DP-2";
+        mode = "2560x1440@165";
+      }
+    ];
   };
 }
