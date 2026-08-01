@@ -9,11 +9,8 @@
 in {
   options.myHomeManager.windowManagers.hyprland = {
     enable = lib.mkEnableOption "hyprland";
-    monitors = mkOptionWithType (lib.types.listOf (lib.types.submodule {
+    monitors = mkOptionWithType (lib.types.attrsOf (lib.types.submodule {
       options = {
-        output = lib.mkOption {
-          type = lib.types.str;
-        };
         mode = lib.mkOption {
           type = lib.types.str;
           default = "preferred";
@@ -285,7 +282,7 @@ in {
           clear_notifications = "qs ipc call notifications clearNotifications";
         };
 
-        monitor = cfg.monitors;
+        monitor = lib.mapAttrsToList (name: value: {output = name;} // value) cfg.monitors;
 
         on = {
           _args = [
