@@ -12,6 +12,9 @@
   };
 
   config.myHomeManager.windowManagers = lib.mkIf config.myHomeManager.windowManagers.enable {
-    hyprland.enable = lib.mkDefault true;
+    hyprland = {
+      enable = lib.mkDefault true;
+      animations.enabled = lib.mkDefault true;
+    };
   };
 }

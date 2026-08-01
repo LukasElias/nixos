@@ -5,29 +5,258 @@
   ...
 }: let
   cfg = config.myHomeManager.windowManagers.hyprland;
+  mkOptionWithType = type: lib.mkOption {inherit type;};
 in {
   options.myHomeManager.windowManagers.hyprland = {
     enable = lib.mkEnableOption "hyprland";
-    monitors = lib.mkOption {
-      type = lib.types.listOf (lib.types.submodule {
+    monitors = mkOptionWithType (lib.types.listOf (lib.types.submodule {
+      options = {
+        output = lib.mkOption {
+          type = lib.types.str;
+        };
+        mode = lib.mkOption {
+          type = lib.types.str;
+          default = "preferred";
+        };
+        position = lib.mkOption {
+          type = lib.types.str;
+          default = "auto";
+        };
+        scale = lib.mkOption {
+          type = lib.types.int;
+          default = 1;
+        };
+      };
+    }));
+    animations = lib.mkOption {
+      type = lib.types.submodule {
         options = {
-          output = lib.mkOption {
-            type = lib.types.str;
+          enabled = lib.mkEnableOption "hyprland animations"; # named enabled and not enable because Hyprland uses animations.enabled instead of aniamtions.enable
+          workspace_wraparound = lib.mkEnableOption "hyprland workspace wraparound animation";
+          bezierCurves = lib.mkOption {
+            type = lib.types.attrsOf (lib.types.submodule {
+              options = {
+                X0 = mkOptionWithType lib.types.float;
+                Y0 = mkOptionWithType lib.types.float;
+                X1 = mkOptionWithType lib.types.float;
+                Y1 = mkOptionWithType lib.types.float;
+              };
+            });
+            default = {
+              "easeOutQuint" = {
+                X0 = 0.23;
+                Y0 = 1.0;
+                X1 = 0.32;
+                Y1 = 1.0;
+              };
+              "easeInOutCubic" = {
+                X0 = 0.65;
+                Y0 = 0.05;
+                X1 = 0.36;
+                Y1 = 1.0;
+              };
+              "linear" = {
+                X0 = 0.0;
+                Y0 = 0.0;
+                X1 = 1.0;
+                Y1 = 1.0;
+              };
+              "almostLinear" = {
+                X0 = 0.5;
+                Y0 = 0.5;
+                X1 = 0.75;
+                Y1 = 1.0;
+              };
+              "quick" = {
+                X0 = 0.15;
+                Y0 = 0.0;
+                X1 = 0.1;
+                Y1 = 1.0;
+              };
+            };
           };
-          mode = lib.mkOption {
-            type = lib.types.str;
-            default = "preferred";
+          springCurves = lib.mkOption {
+            type = lib.types.attrsOf (lib.types.submodule {
+              options = {
+                mass = mkOptionWithType lib.types.float;
+                stiffness = mkOptionWithType lib.types.float;
+                dampening = mkOptionWithType lib.types.float;
+              };
+            });
+            default = {
+              "easy" = {
+                mass = 1.0;
+                stiffness = 238.1191;
+                dampening = 24.21279333;
+              };
+            };
           };
-          position = lib.mkOption {
-            type = lib.types.str;
-            default = "auto";
-          };
-          scale = lib.mkOption {
-            type = lib.types.int;
-            default = 1;
+          animations = lib.mkOption {
+            type = lib.types.listOf (lib.types.submodule {
+              options = {
+                enabled = lib.mkOption {
+                  type = lib.types.bool;
+                  default = true;
+                };
+                leaf = mkOptionWithType lib.types.str;
+                speed = mkOptionWithType lib.types.float;
+                curve = mkOptionWithType (lib.types.submodule {
+                  options = {
+                    kind = mkOptionWithType (lib.types.enum ["bezier" "spring"]);
+                    name = mkOptionWithType lib.types.str;
+                  };
+                });
+                style = mkOptionWithType (lib.types.nullOr lib.types.str);
+              };
+            });
+            default = [
+              {
+                leaf = "global";
+                speed = 10.0;
+                curve = {
+                  kind = "bezier";
+                  name = "default";
+                };
+              }
+              {
+                leaf = "border";
+                speed = 5.39;
+                curve = {
+                  kind = "bezier";
+                  name = "easeOutQuint";
+                };
+              }
+              {
+                leaf = "windows";
+                speed = 4.79;
+                curve = {
+                  kind = "spring";
+                  name = "easy";
+                };
+              }
+              {
+                leaf = "windowsIn";
+                speed = 4.1;
+                curve = {
+                  kind = "spring";
+                  name = "easy";
+                };
+                style = "popin 87%";
+              }
+              {
+                leaf = "windowsOut";
+                speed = 1.49;
+                curve = {
+                  kind = "bezier";
+                  name = "linear";
+                };
+                style = "popin 87%";
+              }
+              {
+                leaf = "fadeIn";
+                speed = 1.73;
+                curve = {
+                  kind = "bezier";
+                  name = "almostLinear";
+                };
+              }
+              {
+                leaf = "fadeOut";
+                speed = 1.46;
+                curve = {
+                  kind = "bezier";
+                  name = "almostLinear";
+                };
+              }
+              {
+                leaf = "fade";
+                speed = 3.03;
+                curve = {
+                  kind = "bezier";
+                  name = "quick";
+                };
+              }
+              {
+                leaf = "layers";
+                speed = 3.81;
+                curve = {
+                  kind = "bezier";
+                  name = "easeOutQuint";
+                };
+              }
+              {
+                leaf = "layersIn";
+                speed = 4.0;
+                curve = {
+                  kind = "bezier";
+                  name = "easeOutQuint";
+                };
+                style = "fade";
+              }
+              {
+                leaf = "layersOut";
+                speed = 1.5;
+                curve = {
+                  kind = "bezier";
+                  name = "linear";
+                };
+                style = "fade";
+              }
+              {
+                leaf = "fadeLayersIn";
+                speed = 1.79;
+                curve = {
+                  kind = "bezier";
+                  name = "almostLinear";
+                };
+              }
+              {
+                leaf = "fadeLayersOut";
+                speed = 1.39;
+                curve = {
+                  kind = "bezier";
+                  name = "almostLinear";
+                };
+              }
+              {
+                leaf = "workspaces";
+                speed = 1.94;
+                curve = {
+                  kind = "bezier";
+                  name = "almostLinear";
+                };
+                style = "fade";
+              }
+              {
+                leaf = "workspacesIn";
+                speed = 1.21;
+                curve = {
+                  kind = "bezier";
+                  name = "almostLinear";
+                };
+                style = "fade";
+              }
+              {
+                leaf = "workspacesOut";
+                speed = 1.94;
+                curve = {
+                  kind = "bezier";
+                  name = "almostLinear";
+                };
+                style = "fade";
+              }
+              {
+                leaf = "zoomFactor";
+                speed = 7.0;
+                curve = {
+                  kind = "bezier";
+                  name = "quick";
+                };
+              }
+            ];
           };
         };
-      });
+      };
     };
   };
 
@@ -71,6 +300,7 @@ in {
         };
 
         config = {
+          animations = {inherit (cfg.animations) enabled workspace_wraparound;};
           general = {
             gaps_in = 5;
             gaps_out = 10;
@@ -99,7 +329,6 @@ in {
             blur.enabled = false;
             shadow.enabled = false;
           };
-          animations.enabled = false;
           dwindle.preserve_split = true;
           misc.force_default_wallpaper = 0;
           input = {
@@ -113,11 +342,13 @@ in {
             };
           };
         };
+
         gesture = {
           fingers = 3;
           direction = "horizontal";
           action = "workspace";
         };
+
         window_rule = [
           {
             name = "Browser on workspace 2";
@@ -135,6 +366,65 @@ in {
             workspace = "4 silent";
           })
         ];
+
+        # --------------animations--------------
+        animation = (
+          let
+            toHyprlandAnimation = {
+              leaf,
+              enabled,
+              speed,
+              curve,
+              style,
+            }: {
+              inherit leaf enabled speed style;
+              "${curve.kind}" = curve.name;
+            };
+          in
+            lib.map toHyprlandAnimation cfg.animations.animations
+        );
+
+        # ----------------curves----------------
+
+        # bezier
+        curve = let
+          toHyprlandBezier = {
+            X0,
+            Y0,
+            X1,
+            Y1,
+          }: {
+            type = "bezier";
+            points = [
+              [X0 Y0]
+              [X1 Y1]
+            ];
+          };
+          toHyprlandSpring = curve:
+            {
+              type = "spring";
+            }
+            // curve;
+        in
+          []
+          # bezier
+          ++ (lib.mapAttrsToList
+            (name: curve: {
+              _args = [
+                name
+                (toHyprlandBezier curve)
+              ];
+            })
+            cfg.animations.bezierCurves)
+          # spring
+          ++ (lib.mapAttrsToList
+            (name: curve: {
+              _args = [
+                name
+                (toHyprlandSpring curve)
+              ];
+            })
+            cfg.animations.springCurves);
 
         # ----------------binds-----------------
         main_mod._var = "SUPER";
