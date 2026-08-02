@@ -15,7 +15,6 @@
   home.packages = with pkgs; [
     fd
     ripgrep
-    fuzzel
     stow
     fastfetch
     unzip
