@@ -105,7 +105,7 @@ Scope {
 
 				// Header
 				Text {
-					text: "	Applications"
+					text: "Applications"
 					color: `#${Config.palette.base0B}`
 					font.pixelSize: 14
 					font.family: root.font
@@ -314,7 +314,7 @@ Scope {
 					// Empty state
 					Text {
 						anchors.centerIn: parent
-						text: "	No applications found"
+						text: "No applications found"
 						color: `#${Config.palette.base0D}`
 						// font: Config.font
 						font.pixelSize: 14
