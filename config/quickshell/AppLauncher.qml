@@ -2,87 +2,72 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Widgets
-
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 
 import "config.js" as Config
 
-// PanelWindow
-// ListView
-// SearchBar
-// Launch app
-
 Scope {
 	id: root
-	property bool launcherOpen: false
+
+	property string font: Config.font.family
 
 	IpcHandler {
 		target: "launcher"
 
 		function toggle(): void {
-			root.launcherOpen = !root.launcherOpen
-			if (root.launcherOpen) {
+			launcherPanel.visible = !launcherPanel.visible
+			if (launcherPanel.visible) {
 				searchInput.text = ""
-				selectedIndex = 0
+				root.selectedIndex = -1
 				searchInput.forceActiveFocus()
 			}
 		}
 	}
 
-	property list<DesktopEntry> allItems: DesktopEntries.applications.values
 	property int selectedIndex: 0
 
 	ScriptModel {
-		id: filteredItems
-
+		id: filteredApps
 		objectProp: "id"
 		values: {
-			const all = [...root.allItems];
-
-			const query = searchInput.text;
-
-			if (query === "") return all.sort((a, b) => a.name.localeCompare(b.name));
-
-			// const filtered = all
-				// .filter(item =>
-				// 	(item.name && item.name.toLowerCase().includes(query)) ||
-				// 	(item.genericName && item.genericName.toLowerCase().includes(query)) ||
-				// 	(item.keywords && item.keywords.some(k => k.toLowerCase().includes(query))) ||
-				// 	(item.categories && item.categories.some(c => c.toLowerCase().includes(query)))
-				// )
-			// ;
-
-			// const sorted = filtered
-				// .sort((a, b) => {
-				// 	const aName = a.name.toLowerCase();
-				// 	const bName = b.name.toLowerCase();
-				// 	const aStarts = aName.startsWith(query);
-				// 	const bStarts = bName.startsWith(query);
-				// 	if (aStarts && !bStarts) return -1;
-				// 	if (!aStarts && bStarts) return 1;
-				// 	return aName.localeCompare(bName);
-				// })
-			// ;
-
-			return all;
+			const all = [...DesktopEntries.applications.values];
+			const q = searchInput.text.trim().toLowerCase();
+			if (q === "") return all.sort((a, b) => a.name.localeCompare(b.name));
+			return all.filter(d =>
+				(d.name && d.name.toLowerCase().includes(q)) ||
+				(d.genericName && d.genericName.toLowerCase().includes(q)) ||
+				(d.keywords && d.keywords.some(k => k.toLowerCase().includes(q))) ||
+				(d.categories && d.categories.some(c => c.toLowerCase().includes(q)))
+			).sort((a, b) => {
+				const an = a.name.toLowerCase();
+				const bn = b.name.toLowerCase();
+				const aStarts = an.startsWith(q);
+				const bStarts = bn.startsWith(q);
+				if (aStarts && !bStarts) return -1;
+				if (!aStarts && bStarts) return 1;
+				return an.localeCompare(bn);
+			});
 		}
 	}
 
 	function launchApp(entry) {
 		entry.execute();
-		root.launcherOpen = false;
+		launcherPanel.visible = false;
 	}
 
 	PanelWindow {
-		id: launcherOpen
-		visible: root.launcherOpen
+		id: launcherPanel
+		visible: false
 		focusable: true
 		color: "transparent"
-		exclusionMode: ExclusionMode.Ignore
 
 		WlrLayershell.layer: WlrLayer.Overlay
 		WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+		WlrLayershell.namespace: "quickshell-launcher"
+
+		exclusionMode: ExclusionMode.Ignore
 
 		anchors {
 			top: true
@@ -91,61 +76,136 @@ Scope {
 			right: true
 		}
 
+		// Dark overlay backdrop
+		MouseArea {
+			anchors.fill: parent
+			onClicked: launcherPanel.visible = false
+
+			Rectangle {
+				anchors.fill: parent
+				color: `#88${Config.palette.base00}`
+			}
+		}
+
+		// Centered launcher box
 		Rectangle {
+			id: launcherBox
 			anchors.centerIn: parent
-			width: 580 // todo: config.js
+			width: 580
 			height: 480
 			radius: 16
-			// color: `#${Config.palette.base00}`
-			color: "red"
+			color: `#${Config.palette.base00}`
+			border.color: `#${Config.palette.base01}`
+			border.width: 1
 
 			ColumnLayout {
-				TextInput {
-					id: searchInput
-					font: Config.font
+				anchors.fill: parent
+				anchors.margins: 16
+				spacing: 12
 
+				// Header
+				Text {
+					text: "	Applications"
+					color: `#${Config.palette.base0B}`
+					font.pixelSize: 14
+					font.family: root.font
+					font.bold: true
+					// font: Config.font
+				}
+
+				// Search bar
+				Rectangle {
 					Layout.fillWidth: true
-					Layout.alignment: Qt.AlignVCenter
+					implicitHeight: 44
+					radius: 10
+					color: `#${Config.palette.base02}`
+					border.color: searchInput.activeFocus ? `#${Config.palette.base0B}` : `#${Config.palette.base01}`
+					border.width: 1
 
-					color: `#${Config.palette.base05}`
-					clip: true
-					focus: true
+					Behavior on border.color {
+						ColorAnimation { duration: 150 }
+					}
 
-					Accessible.role: Accessible.EditableText
-					Accessible.name: "Search applications"
+					RowLayout {
+						anchors.fill: parent
+						anchors.leftMargin: 14
+						anchors.rightMargin: 14
+						spacing: 10
 
-					onTextChanged: root.selectedIndex = 0
+						Text {
+							text: ""
+							color: `#${Config.palette.base0D}`
+							font.pixelSize: 16
+							font.family: root.font
+							Layout.alignment: Qt.AlignVCenter
+						}
 
-					Keys.onEscapePressed: root.launcherOpen = false
+						TextInput {
+							id: searchInput
+							Layout.fillWidth: true
+							Layout.alignment: Qt.AlignVCenter
+							color: `#${Config.palette.base05}`
+							// font: Config.font
+							font.pixelSize: 15
+							font.family: root.font
+							clip: true
+							focus: true
+							Accessible.role: Accessible.EditableText
+							Accessible.name: "Search applications"
 
-					Keys.onPressed: event => {
-						if (event.key === Qt.Key_Down) {
-							event.accepted = true;
-							root.selectedIndex = Math.min(root.selectedIndex + 1, resultsList.count - 1);
-							resultsList.positionViewAtIndex(root.selectedIndex, ListView.Contain);
-						} else if (event.key === Qt.Key_Up) {
-							event.accepted = true;
-							root.selectedIndex = Math.max(root.selectedIndex - 1, 0);
-							resultsList.positionViewAtIndex(root.selectedIndex, ListView.Contain);
-						} else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-							event.accepted = true;
-							if (root.selectedIndex >= 0) {
-								const entry = root.filteredItems[root.selectedIndex];
-								if (entry) root.launchApp(entry);
+							Text {
+								anchors.fill: parent
+								text: "Type to search..."
+								color: `#${Config.palette.base0D}`
+								font: parent.font
+								visible: !parent.text && !parent.activeFocus
+								verticalAlignment: Text.AlignVCenter
 							}
-						} else if (event.key === Qt.Key_Tab) {
-							event.accepted = true;
-							root.selectedIndex = Math.min(root.selectedIndex + 1, resultsList.count - 1);
-							resultsList.positionViewAtIndex(root.selectedIndex, ListView.Contain);
+
+							onTextChanged: root.selectedIndex = text === "" ? -1 : 0
+
+							Keys.onEscapePressed: launcherPanel.visible = false
+
+							Keys.onPressed: event => {
+								if (event.key === Qt.Key_Down) {
+									event.accepted = true;
+									root.selectedIndex = Math.min(root.selectedIndex + 1, resultsList.count - 1);
+									resultsList.positionViewAtIndex(root.selectedIndex, ListView.Contain);
+								} else if (event.key === Qt.Key_Up) {
+									event.accepted = true;
+									root.selectedIndex = Math.max(root.selectedIndex - 1, 0);
+									resultsList.positionViewAtIndex(root.selectedIndex, ListView.Contain);
+								} else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+									event.accepted = true;
+									if (root.selectedIndex >= 0) {
+										const entry = filteredApps.values[root.selectedIndex];
+										if (entry) root.launchApp(entry);
+									}
+								} else if (event.key === Qt.Key_Tab) {
+									event.accepted = true;
+									root.selectedIndex = Math.min(root.selectedIndex + 1, resultsList.count - 1);
+									resultsList.positionViewAtIndex(root.selectedIndex, ListView.Contain);
+								}
+							}
 						}
 					}
 				}
 
+				// Results count
+				Text {
+					text: resultsList.count + " application" + (resultsList.count !== 1 ? "s" : "")
+					color: `#${Config.palette.base0D}`
+					// font: Config.font
+					font.pixelSize: 11
+					font.family: root.font
+				}
+
+				// App list
 				ListView {
 					id: resultsList
 					Layout.fillWidth: true
 					Layout.fillHeight: true
-					model: filteredItems
+					model: filteredApps
 					clip: true
 					spacing: 2
 					boundsBehavior: Flickable.StopAtBounds
@@ -155,14 +215,14 @@ Scope {
 
 					highlight: Rectangle {
 						radius: 8
-						color: `#${Config.palette.base02}`
+						color: `#${Config.palette.base03}`
 						visible: root.selectedIndex >= 0
 
 						Rectangle {
 							width: 3
 							height: 24
 							radius: 2
-							color: `#${Config.palette.base08}`
+							color: `#${Config.palette.base0B}`
 							anchors.left: parent.left
 							anchors.leftMargin: 2
 							anchors.verticalCenter: parent.verticalCenter
@@ -190,8 +250,8 @@ Scope {
 
 							// App icon
 							Item {
-								width: 28
-								height: 28
+								implicitWidth: 28
+								implicitHeight: 28
 								Layout.alignment: Qt.AlignVCenter
 
 								IconImage {
@@ -204,8 +264,10 @@ Scope {
 								Text {
 									anchors.centerIn: parent
 									text: ""
-									color: "yellow"
-									font: Config.font
+									color: `#${Config.palette.base0B}`
+									// font: Config.font
+									font.pixelSize: 20
+									font.family: root.font
 									visible: (delegateRoot.modelData.icon ?? "") === ""
 								}
 							}
@@ -218,16 +280,21 @@ Scope {
 
 								Text {
 									text: delegateRoot.modelData.name ?? ""
-									color: root.selectedIndex === delegateRoot.index ? "orange" : "blue"
-									font: Config.font
+									color: root.selectedIndex === delegateRoot.index ? `#${Config.palette.base05}` : `#${Config.palette.base07}`
+									// font: Config.font
+									font.pixelSize: 13
+									font.family: root.font
+									font.bold: root.selectedIndex === delegateRoot.index
 									elide: Text.ElideRight
 									Layout.fillWidth: true
 								}
 
 								Text {
 									text: delegateRoot.modelData.genericName ?? delegateRoot.modelData.comment ?? ""
-									color: "blue"
-									font: Config.font
+									color: `#${Config.palette.base0D}`
+									// font: Config.font
+									font.pixelSize: 11
+									font.family: root.font
 									elide: Text.ElideRight
 									Layout.fillWidth: true
 									visible: text !== ""
@@ -245,14 +312,104 @@ Scope {
 					}
 
 					// Empty state
-					// Text {
-					// 	anchors.centerIn: parent
-					// 	text: "	No applications found"
-					// 	color: root.theme.textMuted
-					// 	font.pixelSize: 14
-					// 	font.family: root.font
-					// 	visible: resultsList.count === 0 && searchInput.text !== ""
-					// }
+					Text {
+						anchors.centerIn: parent
+						text: "	No applications found"
+						color: `#${Config.palette.base0D}`
+						// font: Config.font
+						font.pixelSize: 14
+						font.family: root.font
+						visible: resultsList.count === 0 && searchInput.text !== ""
+					}
+				}
+
+				// Footer hint
+				RowLayout {
+					Layout.fillWidth: true
+					spacing: 16
+
+					Row {
+						spacing: 4
+						Rectangle {
+							width: hintUp.width + 8
+							height: 18
+							radius: 4
+							color: `#${Config.palette.base02}`
+							Text {
+								id: hintUp
+								anchors.centerIn: parent
+								text: "↑↓"
+								color: `#${Config.palette.base0D}`
+								// font: Config.font
+								font.pixelSize: 10
+								font.family: root.font
+							}
+						}
+						Text {
+							text: "navigate"
+							color: `#${Config.palette.base0D}`
+							// font: Config.font
+							font.pixelSize: 10
+							font.family: root.font
+							anchors.verticalCenter: parent.verticalCenter
+						}
+					}
+
+					Row {
+						spacing: 4
+						Rectangle {
+							width: hintEnter.width + 8
+							height: 18
+							radius: 4
+							color: `#${Config.palette.base02}`
+							Text {
+								id: hintEnter
+								anchors.centerIn: parent
+								text: "⏎"
+								color: `#${Config.palette.base0D}`
+								// font: Config.font
+								font.pixelSize: 10
+								font.family: root.font
+							}
+						}
+						Text {
+							text: "launch"
+							color: `#${Config.palette.base0D}`
+							// font: Config.font
+							font.pixelSize: 10
+							font.family: root.font
+							anchors.verticalCenter: parent.verticalCenter
+						}
+					}
+
+					Row {
+						spacing: 4
+						Rectangle {
+							width: hintEsc.width + 8
+							height: 18
+							radius: 4
+							color: `#${Config.palette.base02}`
+							Text {
+								id: hintEsc
+								anchors.centerIn: parent
+								text: "esc"
+								color: `#${Config.palette.base0D}`
+								// font: Config.font
+								font.pixelSize: 10
+								font.family: root.font
+							}
+						}
+						Text {
+							text: "close"
+							color: `#${Config.palette.base0D}`
+							// font: Config.font
+							font.pixelSize: 10
+							font.family: root.font
+							anchors.verticalCenter: parent.verticalCenter
+						}
+					}
+
+					Item { Layout.fillWidth: true }
 				}
 			}
 		}
