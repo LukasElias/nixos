@@ -267,7 +267,7 @@ in {
 
       settings = {
         terminal._var = "kitty";
-        menu._var = "fuzzel";
+        menu._var = "qs ipc call launcher toggle";
         music_player._var = "spotify";
         browser._var = "firefox";
         discord = lib.mkIf config.myHomeManager.programs.graphical.discord.enable {
