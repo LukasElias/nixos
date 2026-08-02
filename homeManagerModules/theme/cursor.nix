@@ -32,6 +32,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.pointerCursor = {
+      enable = true;
       gtk.enable = true;
       hyprcursor.enable = true;
 
