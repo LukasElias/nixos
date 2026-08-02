@@ -100,6 +100,63 @@
         };
 
         settings = {
+          "browser.uiCustomization.state" = lib.toJSON {
+            "placements" = {
+              "widget-overflow-fixed-list" = [
+                "print-button"
+                "preferences-button"
+                "screenshot-button"
+              ];
+              "unified-extensions-area" = [
+                "ublock0_raymondhill_net-browser-action"
+                "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+                "keepassxc-browser_keepassxc_org-browser-action"
+              ];
+              "nav-bar" = [
+                "reset-pbm-toolbar-button"
+                "sidebar-button"
+                "home-button"
+                "stop-reload-button"
+                "back-button"
+                "forward-button"
+                "urlbar-container"
+                "unified-extensions-button"
+                "developer-button"
+                "downloads-button"
+                "vertical-spacer"
+              ];
+              "toolbar-menubar" = [
+                "menubar-items"
+              ];
+              "TabsToolbar" = [];
+              "vertical-tabs" = [
+                "tabbrowser-tabs"
+              ];
+              "PersonalToolbar" = [
+                "import-button"
+                "personal-bookmarks"
+              ];
+            };
+            "seen" = [
+              "reset-pbm-toolbar-button"
+              "_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action"
+              "keepassxc-browser_keepassxc_org-browser-action"
+              "ublock0_raymondhill_net-browser-action"
+              "developer-button"
+              "screenshot-button"
+            ];
+            "dirtyAreaCache" = [
+              "unified-extensions-area"
+              "nav-bar"
+              "TabsToolbar"
+              "vertical-tabs"
+              "PersonalToolbar"
+              "toolbar-menubar"
+              "widget-overflow-fixed-list"
+            ];
+            "currentVersion" = 24;
+            "newElementCount" = 1;
+          };
           "browser.startup.page" = 3;
           "browser.smartwindow.sidebar.openByDefault" = false;
           "browser.newtabpage.activity-stream.widgets.weather.enabled" = false;
