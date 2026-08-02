@@ -45,7 +45,7 @@
     home.stateVersion = "25.11"; # Please read the comment before changing.
 
     myHomeManager = {
-      wayland.windowManagers.hyprland.monitors."eDP-1" = {
+      windowManagers.hyprland.monitors."eDP-1" = {
         mode = "1920x1200@60";
       };
       programs.graphical = {
