@@ -54,6 +54,7 @@
         blender.enable = lib.mkForce false;
         prismlauncher.enable = lib.mkForce false;
         discord.enable = lib.mkForce false;
+        inkscape.enable = lib.mkForce false;
       };
     };
   };

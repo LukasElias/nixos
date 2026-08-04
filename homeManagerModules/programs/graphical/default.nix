@@ -10,6 +10,7 @@
     ./firefox.nix
     ./handbrake.nix
     ./hyprlock.nix
+    ./inkscape.nix
     ./keepassxc.nix
     ./kitty.nix
     ./prismlauncher.nix
@@ -112,5 +113,7 @@
     keepassxc.enable = lib.mkDefault true;
 
     synologyDriveClient.enable = lib.mkDefault true;
+
+    inkscape.enable = lib.mkDefault true;
   };
 }
