@@ -10,7 +10,7 @@
 
   config = lib.mkIf config.myHomeManager.programs.graphical.blender.enable {
     home.packages = with pkgs; [
-      blender
+      pkgsRocm.blender
     ];
   };
 }
