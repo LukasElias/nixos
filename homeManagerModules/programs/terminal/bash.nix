@@ -15,7 +15,6 @@ in {
         h = "help";
       };
     };
-    enableColorAliases = lib.mkEnableOption "bash color aliases";
     history = lib.mkOption {
       type = lib.types.submodule {
         options = {

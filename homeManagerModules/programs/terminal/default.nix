@@ -18,10 +18,7 @@
   };
 
   config.myHomeManager.programs.terminal = lib.mkIf config.myHomeManager.programs.terminal.enable {
-    bash = {
-      enable = lib.mkDefault true;
-      enableColorAliases = lib.mkDefault true;
-    };
+    bash.enable = lib.mkDefault true;
 
     dircolors.enable = lib.mkDefault true;
 
