@@ -6,37 +6,37 @@ import QtQuick.Layouts
 import "../config.js" as Config
 
 RowLayout {
-	id: root
+    id: root
 
-	property bool wifiEnabled: Networking.wifiEnabled
-	property var devices: Networking.devices
+    property bool wifiEnabled: Networking.wifiEnabled
+    property var devices: Networking.devices
 
-	Repeater {
-		model: root.devices
+    Repeater {
+        model: root.devices
 
-		RowLayout {
-			id: device
-			required property NetworkDevice modelData
+        RowLayout {
+            id: device
+            required property NetworkDevice modelData
 
-			Text {
-				text: DeviceType.toString(device.modelData.type)
-				color: `#${Config.palette.base05}`
-				font: Config.font
-			}
+            Text {
+                text: DeviceType.toString(device.modelData.type)
+                color: `#${Config.palette.base05}`
+                font: Config.font
+            }
 
-			Repeater {
-				model: device.modelData.networks
+            Repeater {
+                model: device.modelData.networks
 
-				Text {
-					required property Network modelData
+                Text {
+                    required property Network modelData
 
-					text: modelData.name
-					visible: modelData.connected
+                    text: modelData.name
+                    visible: modelData.connected
 
-					color: `#${Config.palette.base05}`
-					font: Config.font
-				}
-			}
-		}
-	}
+                    color: `#${Config.palette.base05}`
+                    font: Config.font
+                }
+            }
+        }
+    }
 }

@@ -6,32 +6,32 @@ import QtQuick.Layouts
 import "../config.js" as Config
 
 RowLayout {
-	spacing: 0
+    spacing: 0
 
-	Repeater {
-		model: Hyprland.workspaces
+    Repeater {
+        model: Hyprland.workspaces
 
-		Rectangle {
-			id: workspace
-			required property HyprlandWorkspace modelData
+        Rectangle {
+            id: workspace
+            required property HyprlandWorkspace modelData
 
-			Layout.preferredWidth: 30
-			Layout.fillHeight: true
+            Layout.preferredWidth: 30
+            Layout.fillHeight: true
 
-			color: modelData.focused ? `#${Config.palette.base0B}` : `#${Config.palette.base08}`
+            color: modelData.focused ? `#${Config.palette.base0B}` : `#${Config.palette.base08}`
 
-			Text {
-				text: workspace.modelData.id
-				color: `#${Config.palette.base05}`
-				font: Config.font
+            Text {
+                text: workspace.modelData.id
+                color: `#${Config.palette.base05}`
+                font: Config.font
 
-				anchors.centerIn: parent
-			}
+                anchors.centerIn: parent
+            }
 
-			MouseArea {
-				anchors.fill: parent
-				onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${workspace.modelData.id} })`)
-			}
-		}
-	}
+            MouseArea {
+                anchors.fill: parent
+                onClicked: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${workspace.modelData.id} })`)
+            }
+        }
+    }
 }

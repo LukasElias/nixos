@@ -8,76 +8,78 @@ import qs.Widgets
 import "config.js" as Config
 
 Scope {
-	id: root
-	property var modelData
+    id: root
+    property var modelData
 
-	PanelWindow {
-		id: window
-		screen: root.modelData
+    PanelWindow {
+        id: window
+        screen: root.modelData
 
-		anchors {
-			top: true
-			left: true
-			right: true
-		}
+        anchors {
+            top: true
+            left: true
+            right: true
+        }
 
-		implicitHeight: 30
+        implicitHeight: 30
 
-		color: "transparent"
+        color: "transparent"
 
-		Rectangle {
-			anchors.fill: parent
-			color: `#aa${Config.palette.base00}`
+        Rectangle {
+            anchors.fill: parent
+            color: `#aa${Config.palette.base00}`
 
-			RowLayout {
-				anchors {
-					left: parent.left
-					top: parent.top
-					bottom: parent.bottom
-				}
+            RowLayout {
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                }
 
-				Workspaces {}
+                Workspaces {}
 
-				Splitter {}
+                Splitter {}
 
-				Tray { window: window }
+                Tray {
+                    window: window
+                }
 
-				Splitter {}
+                Splitter {}
 
-				Audio {}
+                Audio {}
 
-				Splitter {}
+                Splitter {}
 
-				Mpris {}
-			}
+                Mpris {}
+            }
 
-			RowLayout {
-				anchors.centerIn: parent
-				
-				Clock {}
-			}
+            RowLayout {
+                anchors.centerIn: parent
 
-			RowLayout {
-				anchors {
-					right: parent.right
-					top: parent.top
-					bottom: parent.bottom
-				}
+                Clock {}
+            }
 
-				Bluetooth {}
+            RowLayout {
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
+                }
 
-				Splitter {}
+                Bluetooth {}
 
-				Network {}
+                Splitter {}
 
-				Splitter {}
+                Network {}
 
-				Battery {}
+                Splitter {}
 
-				Splitter {}
+                Battery {}
 
-				Hardware {}
-			}
-		}
-	}
+                Splitter {}
+
+                Hardware {}
+            }
+        }
+    }
 }

@@ -7,106 +7,106 @@ import QtQuick.Layouts
 import "config.js" as Config
 
 Scope {
-	id: root
+    id: root
 
-	property bool menuOpen: false
+    property bool menuOpen: false
 
-	IpcHandler {
-		target: "logoutmenu"	
+    IpcHandler {
+        target: "logoutmenu"
 
-		function toggle() {
-			root.menuOpen = !root.menuOpen
-		}
+        function toggle() {
+            root.menuOpen = !root.menuOpen;
+        }
 
-		function open() {
-			root.menuOpen = true
-		}
+        function open() {
+            root.menuOpen = true;
+        }
 
-		function close() {
-			root.menuOpen = false
-		}
-	}
+        function close() {
+            root.menuOpen = false;
+        }
+    }
 
-	PanelWindow {
-		id: logoutmenu
+    PanelWindow {
+        id: logoutmenu
 
-		visible: root.menuOpen
+        visible: root.menuOpen
 
-		color: "transparent"
+        color: "transparent"
 
-		focusable: true
+        focusable: true
 
-		anchors {
-			top: true
-			bottom: true
-			right: true
-			left: true
-		}
+        anchors {
+            top: true
+            bottom: true
+            right: true
+            left: true
+        }
 
-		Shortcut {
-			sequences: ["q", "Escape"]
-			onActivated: root.menuOpen = false;
-		}
+        Shortcut {
+            sequences: ["q", "Escape"]
+            onActivated: root.menuOpen = false
+        }
 
-		Rectangle {
-			anchors.fill: parent
-			anchors.margins: 200;
+        Rectangle {
+            anchors.fill: parent
+            anchors.margins: 200
 
-			color: `#aa${Config.palette.base00}`
+            color: `#aa${Config.palette.base00}`
 
-			GridLayout {
-				anchors.fill: parent
-				columns: 3
-				rows: 2
-				columnSpacing: 10
-				rowSpacing: 10
+            GridLayout {
+                anchors.fill: parent
+                columns: 3
+                rows: 2
+                columnSpacing: 10
+                rowSpacing: 10
 
-				Repeater {
-					model: Config.logoutmenu.buttons
+                Repeater {
+                    model: Config.logoutmenu.buttons
 
-					Rectangle {
-						id: card
-						required property var modelData
+                    Rectangle {
+                        id: card
+                        required property var modelData
 
-						Layout.fillWidth: true
-						Layout.fillHeight: true
-						radius: 8
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        radius: 8
 
-						color: `#${Config.palette.base01}`
+                        color: `#${Config.palette.base01}`
 
-						Text {
-							text: `${card.modelData.text} [${card.modelData.keybind}]`
+                        Text {
+                            text: `${card.modelData.text} [${card.modelData.keybind}]`
 
-							color: `#${Config.palette.base05}`
+                            color: `#${Config.palette.base05}`
 
-							font: Config.font
+                            font: Config.font
 
-							anchors.centerIn: parent
-						}
+                            anchors.centerIn: parent
+                        }
 
-						MouseArea {
-							anchors.fill: parent
-							onClicked: card.activate()
-						}
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: card.activate()
+                        }
 
-						Shortcut {
-							sequence: card.modelData.keybind
-							autoRepeat: false
-							onActivated: card.activate()
-						}
+                        Shortcut {
+                            sequence: card.modelData.keybind
+                            autoRepeat: false
+                            onActivated: card.activate()
+                        }
 
-						function activate() {
-							command.startDetached();
-							root.menuOpen = false;
-						}
+                        function activate() {
+                            command.startDetached();
+                            root.menuOpen = false;
+                        }
 
-						Process {
-							id: command
-							command: card.modelData.command
-						}
-					}
-				}
-			}
-		}
-	}
+                        Process {
+                            id: command
+                            command: card.modelData.command
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

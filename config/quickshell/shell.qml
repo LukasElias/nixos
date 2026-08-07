@@ -5,17 +5,17 @@ import Quickshell
 import QtQuick
 
 ShellRoot {
-	id: root
+    id: root
 
-	Variants {
-		model: Quickshell.screens
+    Variants {
+        model: Quickshell.screens
 
-		delegate: Bar {}
-	}
+        delegate: Bar {}
+    }
 
-	Notifications {}
+    Notifications {}
 
-	LogoutMenu {}
+    LogoutMenu {}
 
-	AppLauncher {}
+    AppLauncher {}
 }
