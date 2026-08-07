@@ -38,43 +38,10 @@
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.treefmt-nix.flakeModule
+        ./flake/hosts.nix
+        ./flake/shell.nix
+        ./flake/systems.nix
+        ./flake/treefmt.nix
       ];
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-      perSystem = {pkgs, ...}: {
-        treefmt.programs = {
-          alejandra.enable = true;
-          stylua.enable = true;
-          qmlformat.enable = true;
-        };
-
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            nil
-            lua-language-server
-            kdePackages.qtdeclarative
-          ];
-        };
-      };
-      flake = {lib, ...}: {
-        nixosConfigurations = {
-          LukasLaptop = lib.nixosSystem {
-            specialArgs = {inherit inputs;};
-            modules = [
-              ./hosts/LukasLaptop/configuration.nix
-              inputs.home-manager.nixosModules.default
-            ];
-          };
-          LukasPC = lib.nixosSystem {
-            specialArgs = {inherit inputs;};
-            modules = [
-              ./hosts/LukasPC/configuration.nix
-              inputs.home-manager.nixosModules.default
-            ];
-          };
-        };
-      };
     };
 }
