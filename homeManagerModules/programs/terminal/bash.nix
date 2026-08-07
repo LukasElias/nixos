@@ -2,9 +2,19 @@
   lib,
   config,
   ...
-}: {
+}: let
+  cfg = config.myHomeManager.programs.terminal.bash;
+in {
   options.myHomeManager.programs.terminal.bash = {
     enable = lib.mkEnableOption "bash";
+    aliases = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      default = {
+        ls = "ls --color";
+        grep = "grep --color";
+        h = "help";
+      };
+    };
     enableColorAliases = lib.mkEnableOption "bash color aliases";
     history = lib.mkOption {
       type = lib.types.submodule {
@@ -24,15 +34,12 @@
     };
   };
 
-  config = lib.mkIf config.myHomeManager.programs.terminal.bash.enable {
+  config = lib.mkIf cfg.enable {
     programs.bash = {
       enable = true;
-      historySize = config.myHomeManager.programs.terminal.bash.history.memorySize;
-      historyFileSize = config.myHomeManager.programs.terminal.bash.history.fileSize;
-      shellAliases = lib.mkIf config.myHomeManager.programs.terminal.bash.enableColorAliases {
-        ls = "ls --color";
-        grep = "grep --color";
-      };
+      historySize = cfg.history.memorySize;
+      historyFileSize = cfg.history.fileSize;
+      shellAliases = cfg.aliases;
     };
   };
 }
