@@ -6,7 +6,7 @@
   ...
 }: let
   cfg = config.myHomeManager.programs.graphical.firefox;
-in{
+in {
   options.myHomeManager.programs.graphical.firefox = {
     enable = lib.mkEnableOption "firefox";
   };
