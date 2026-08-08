@@ -10,6 +10,9 @@
   config = lib.mkIf config.myHomeManager.programs.graphical.discord.enable {
     programs.discord = {
       enable = true;
+      settings = {
+        MINIMIZE_TO_TRAY = false;
+      };
     };
   };
 }

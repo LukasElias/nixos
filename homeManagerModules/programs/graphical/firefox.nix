@@ -4,12 +4,14 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  cfg = config.myHomeManager.programs.graphical.firefox;
+in{
   options.myHomeManager.programs.graphical.firefox = {
     enable = lib.mkEnableOption "firefox";
   };
 
-  config = lib.mkIf config.myHomeManager.programs.graphical.firefox.enable {
+  config = lib.mkIf cfg.enable {
     programs.firefox = {
       enable = true;
       configPath = "${config.xdg.configHome}/mozilla/firefox";
@@ -95,6 +97,24 @@
 
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = ["@ho"];
+            };
+
+            noogle = {
+              name = "Noogle";
+              urls = [
+                {
+                  template = "https://noogle.dev/q/";
+                  params = [
+                    {
+                      name = "term";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@ng"];
             };
           };
         };
