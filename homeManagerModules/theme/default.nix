@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./colors.nix
     ./cursor.nix
     ./font.nix
     ./gtk.nix
