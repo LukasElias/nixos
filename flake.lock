@@ -585,7 +585,8 @@
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
         "sysc-greet": "sysc-greet",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": "treefmt-nix",
+        "wrappers": "wrappers"
       }
     },
     "sysc-greet": {
@@ -657,6 +658,26 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785177581,
+        "narHash": "sha256-9Z4l080DSrHMxoQTZTpVsML2h6JDuB9lDwHPsLd9BrQ=",
+        "owner": "Lassulus",
+        "repo": "wrappers",
+        "rev": "f57bc81aa9669871343341b13aa175c8927b6a74",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Lassulus",
+        "repo": "wrappers",
         "type": "github"
       }
     },
