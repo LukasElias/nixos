@@ -16,6 +16,6 @@ in {
 
   config.myWrappers = lib.mkIf cfg.enable {
     programs.enable = lib.mkDefault true;
-    # services.enable = lib.mkDefault true;
+    services.enable = lib.mkDefault true;
   };
 }
