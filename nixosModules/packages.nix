@@ -13,7 +13,6 @@
 
     environment.systemPackages = with pkgs; [
       wget
-      git
       curl
       gcc
     ];

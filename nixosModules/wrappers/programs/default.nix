@@ -16,6 +16,6 @@ in {
 
   config.myWrappers.programs = lib.mkIf cfg.enable {
     graphical.enable = lib.mkDefault true;
-    # terminal.enable = lib.mkDefault true;
+    terminal.enable = lib.mkDefault true;
   };
 }
