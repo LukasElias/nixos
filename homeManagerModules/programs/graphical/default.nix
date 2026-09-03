@@ -13,6 +13,7 @@
     ./inkscape.nix
     ./keepassxc.nix
     ./kitty.nix
+    ./plex.nix
     ./prismlauncher.nix
     ./quickshell.nix
     ./spotify.nix
@@ -115,5 +116,7 @@
     synologyDriveClient.enable = lib.mkDefault true;
 
     inkscape.enable = lib.mkDefault true;
+
+    plex.enable = lib.mkDefault true;
   };
 }
