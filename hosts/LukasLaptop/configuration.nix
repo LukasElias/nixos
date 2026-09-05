@@ -52,7 +52,6 @@
         handbrake.enable = lib.mkForce false;
         steam.enable = lib.mkForce false;
         blender.enable = lib.mkForce false;
-        prismlauncher.enable = lib.mkForce false;
         discord.enable = lib.mkForce false;
       };
     };
