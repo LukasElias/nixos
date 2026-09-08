@@ -11,6 +11,7 @@
     ./handbrake.nix
     ./hyprlock.nix
     ./inkscape.nix
+    ./kdenlive.nix
     ./keepassxc.nix
     ./kitty.nix
     ./plex.nix
@@ -118,5 +119,7 @@
     inkscape.enable = lib.mkDefault true;
 
     plex.enable = lib.mkDefault true;
+
+    kdenlive.enable = lib.mkDefault true;
   };
 }
