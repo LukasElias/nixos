@@ -13,11 +13,12 @@ in {
   config = lib.mkIf cfg.enable {
     qt = {
       enable = true;
-      platformTheme.name = "gtk3";
-      style = {
-        name = "gtk2";
-        package = pkgs.kdePackages.breeze;
-      };
+      # Not rly a reproducible setting
+      platformTheme.name = "qtct";
+      # style = {
+      #   name = "breeze";
+      #   package = pkgs.kdePackages.breeze;
+      # };
     };
   };
 }
