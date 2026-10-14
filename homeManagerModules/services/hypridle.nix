@@ -33,7 +33,7 @@
           }
           {
             timeout = 1800; # 30min: Suspend the system
-            on-timeout = "systemctl suspend";
+            on-timeout = "if [ ! -f /tmp/no_suspend ]; then systemctl suspend; fi";
           }
         ];
       };
