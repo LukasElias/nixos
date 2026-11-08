@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./blueman.nix
+    ./cdemu.nix
     ./sysc-greet.nix
     ./libinput.nix
     ./pipewire.nix

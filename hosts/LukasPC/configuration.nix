@@ -33,6 +33,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "26.05"; # Did you read the comment?
 
+  myNixos.services.cdemu.enable = true;
+
   home-manager.users."${config.myNixos.users.name}" = {
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
